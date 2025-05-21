@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 import { useEffect } from "react";
+import mainImage from "../assets/WhatsApp Image 2025-05-21 at 22.11.33_715892f8.jpg";
 
 export default function Home() {
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function Home() {
             >
               <div className="relative rounded-xl shadow-2xl overflow-hidden">
                 <img 
-                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_715892f8.jpg" 
+                  src={mainImage} 
                   alt="Jatin - Personal Trainer" 
                   className="w-full h-full object-cover"
                 />
