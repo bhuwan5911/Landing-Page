@@ -69,12 +69,11 @@ export default function Home() {
               variants={fadeIn('left', 'tween', 0.4, 1)}
               className="w-full md:w-1/2 relative"
             >
-              <div className="relative bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/80 opacity-70"></div>
+              <div className="relative rounded-xl shadow-2xl overflow-hidden">
                 <img 
-                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_f363f5ff.jpg" 
+                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.32_b318d0c9.jpg" 
                   alt="Jatin - Personal Trainer" 
-                  className="w-full h-full object-cover opacity-95 mix-blend-overlay"
+                  className="w-full h-full object-cover"
                 />
                 {/* No overlay text on the image as requested */}
               </div>
