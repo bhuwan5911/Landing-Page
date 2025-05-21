@@ -71,7 +71,7 @@ export default function Home() {
             >
               <div className="relative rounded-xl shadow-2xl overflow-hidden">
                 <img 
-                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.32_b318d0c9.jpg" 
+                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_715892f8.jpg" 
                   alt="Jatin - Personal Trainer" 
                   className="w-full h-full object-cover"
                 />
