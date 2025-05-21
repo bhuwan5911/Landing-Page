@@ -17,7 +17,6 @@ function Router() {
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-12 w-12 border-4 border-secondary rounded-full border-t-transparent"></div></div>}>
         <Switch>
           <Route path="/" component={Home} />
-          <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
