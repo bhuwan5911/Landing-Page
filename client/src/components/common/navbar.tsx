@@ -33,7 +33,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Link href="/">
-            <a className="text-secondary text-2xl font-bebas tracking-wide">FitSync</a>
+            <span className="text-secondary text-2xl font-bebas tracking-wide">HeyJatin</span>
           </Link>
           <span className="text-xs text-gray-400 mt-1">BETA</span>
         </div>
@@ -49,10 +49,13 @@ export default function Navbar() {
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+          <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
             <FaInstagram className="text-xl" />
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+          <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+            <FaYoutube className="text-xl" />
+          </a>
+          <a href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
             <FaYoutube className="text-xl" />
           </a>
           <Link href="/contact">
@@ -92,10 +95,13 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="flex items-center space-x-4 pt-2">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+                <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
                   <FaInstagram className="text-xl" />
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+                <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+                  <FaYoutube className="text-xl" />
+                </a>
+                <a href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
                   <FaYoutube className="text-xl" />
                 </a>
               </div>

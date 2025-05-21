@@ -8,24 +8,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <span className="text-secondary text-3xl font-bebas tracking-wide">FitSync</span>
+              <span className="text-secondary text-3xl font-bebas tracking-wide">HeyJatin</span>
               <span className="text-xs text-gray-400 mt-1">BETA</span>
             </div>
             <p className="text-gray-400 mb-6">
               Professional fitness training and consultation services to help you achieve your personal fitness goals.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
+              <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
                 <FaInstagram className="text-xl" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
+              <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
                 <FaYoutube className="text-xl" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
-                <FaTwitter className="text-xl" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
-                <FaLinkedinIn className="text-xl" />
+              <a href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
+                <FaYoutube className="text-xl" />
               </a>
             </div>
           </div>
