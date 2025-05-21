@@ -112,32 +112,14 @@ export default function Contact() {
               variants={fadeIn('right', 'tween', 0.2, 1)}
               className="w-full lg:w-1/2"
             >
-              <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-6">
-                Let's <span className="text-secondary">Connect</span>
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Have questions about fitness training or want to collaborate on content? Fill out the form and I'll get back to you as soon as possible.
-              </p>
-              
               <div className="mb-8">
-                <div className="flex items-start mb-6">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                    <FaPhone className="text-secondary text-xl" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Call Me</h4>
-                    <p className="text-gray-600">+91 98XXXXXXXX</p>
-                    <p className="text-gray-500 text-sm mt-1">Available 9 AM - 8 PM</p>
-                  </div>
-                </div>
-                
                 <div className="flex items-start mb-6">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <FaEnvelope className="text-blue-500 text-xl" />
                   </div>
                   <div>
                     <h4 className="font-bold">Email Me</h4>
-                    <p className="text-gray-600">contact@heyjatin.com</p>
+                    <p className="text-gray-600">creatorxjatin@gmail.com</p>
                     <p className="text-gray-500 text-sm mt-1">I'll respond within 24 hours</p>
                   </div>
                 </div>
@@ -182,7 +164,7 @@ export default function Contact() {
               className="w-full lg:w-1/2"
             >
               <div className="bg-white rounded-xl shadow-lg p-8">
-                <h3 className="text-2xl font-bold mb-6">Send me a message</h3>
+                <h3 className="text-2xl font-bold mb-6 text-center">Send me a message</h3>
                 
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -76,12 +76,7 @@ export default function Home() {
                   alt="Jatin - Personal Trainer" 
                   className="w-full h-full object-cover opacity-95 mix-blend-overlay"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <h2 className="text-3xl font-bold text-white mb-2">Jatin</h2>
-                    <p className="text-white/90 text-lg">Fitness Coach & Content Creator</p>
-                  </div>
-                </div>
+                {/* No overlay text on the image as requested */}
               </div>
             </motion.div>
           </div>

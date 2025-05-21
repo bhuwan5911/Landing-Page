@@ -30,8 +30,8 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">Contact Info</h4>
             <ul className="space-y-3">
-              <li><a href="mailto:contact@heyjatin.com" className="text-gray-400 hover:text-secondary transition-all">contact@heyjatin.com</a></li>
-              <li><a href="tel:+919812345678" className="text-gray-400 hover:text-secondary transition-all">+91 98XXXXXXXX</a></li>
+              <li><a href="mailto:creatorxjatin@gmail.com" className="text-gray-400 hover:text-secondary transition-all">creatorxjatin@gmail.com</a></li>
+
               <li className="text-gray-400">Mon-Fri: 9AM - 8PM</li>
               <li className="text-gray-400">Sat: 10AM - 6PM</li>
               <li className="text-gray-400">Sun: Closed</li>
