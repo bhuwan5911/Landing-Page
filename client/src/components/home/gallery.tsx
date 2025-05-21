@@ -7,7 +7,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 const galleryItems = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1662696798291-741a8952c4bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: "/src/assets/WhatsApp Image 2025-05-21 at 22.11.32_b318d0c9.jpg",
     title: "Royal Enfield Classic",
     description: "Vintage style with modern performance",
     delay: 0.1,
@@ -28,9 +28,9 @@ const galleryItems = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    title: "Strength Training Zone",
-    description: "Build muscle with our premium weight systems",
+    image: "/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_a2834af8.jpg",
+    title: "Strength Training",
+    description: "Professional gym training for optimal results",
     delay: 0.4,
   },
   {
@@ -42,9 +42,9 @@ const galleryItems = [
   },
   {
     id: 6,
-    image: "https://pixabay.com/get/g039ffd40c815383a8f7ab8239345bc0eca9761c2c6f77e1a3e5042306ba0d913397e1ac3907454f3764f96c7659fd28e1e8fa1d2b5429b5cd13ef1bc26983da2_1280.jpg",
-    title: "Nutrition Essentials",
-    description: "Premium supplements for recovery and growth",
+    image: "/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_f363f5ff.jpg",
+    title: "Fitness Goals",
+    description: "Achieve your fitness goals with professional guidance",
     delay: 0.6,
   },
 ];

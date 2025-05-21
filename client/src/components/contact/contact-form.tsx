@@ -129,17 +129,14 @@ export default function ContactForm() {
             </div>
             
             <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+              <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                 <FaInstagram />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+              <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                 <FaYoutube />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
-                <FaTwitter />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
-                <FaLinkedinIn />
+              <a href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+                <FaYoutube />
               </a>
             </div>
           </motion.div>

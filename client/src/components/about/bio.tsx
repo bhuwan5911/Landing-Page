@@ -18,14 +18,14 @@ export default function Bio() {
             className="w-full lg:w-1/2"
           >
             <img 
-              src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f" 
-              alt="Personal Trainer" 
+              src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_f363f5ff.jpg" 
+              alt="Jatin - Personal Trainer" 
               className="rounded-xl shadow-lg w-full h-auto object-cover"
               style={{ maxHeight: "600px" }}
             />
             <div className="flex justify-center mt-6 space-x-4">
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white shadow-md rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
@@ -33,7 +33,15 @@ export default function Bio() {
                 <FaInstagram size={20} />
               </a>
               <a 
-                href="https://youtube.com" 
+                href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-white shadow-md rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
+              >
+                <FaYoutube size={20} />
+              </a>
+              <a 
+                href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white shadow-md rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
