@@ -47,13 +47,13 @@ The application structure follows a clear separation of concerns with client-sid
 
 4. **Data Validation**: Uses Zod for schema validation of incoming data.
 
-### Database
+### Storage
 
 1. **Schema**: Messages table with fields for name, email, subject, message, and timestamp.
 
-2. **ORM**: Drizzle ORM for type-safe database operations.
+2. **Storage**: In-memory storage using MemStorage class for simplicity.
 
-3. **Connection**: Configurable with environment variables for connecting to PostgreSQL in production.
+3. **Data Persistence**: Messages are stored temporarily in memory during server runtime.
 
 ## Data Flow
 
