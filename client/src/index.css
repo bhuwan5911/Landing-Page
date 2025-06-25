@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --radius: 0.5rem;
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
   --muted: 60 4.8% 95.9%;
@@ -11,7 +14,7 @@
   --popover-foreground: 20 14.3% 4.1%;
   --card: 0 0% 100%;
   --card-foreground: 20 14.3% 4.1%;
-  --border: 20 5.9% 90%;
+  --border: 240 5% 84%;
   --input: 20 5.9% 90%;
   --primary: 0 0% 7%;
   --primary-foreground: 0 0% 100%;
@@ -22,7 +25,6 @@
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
   --ring: 20 14.3% 4.1%;
-  --radius: 0.5rem;
   --text-light: #F7FAFC;
   --text-dark: #121212;
 }
@@ -47,7 +49,6 @@
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   --ring: 240 4.9% 83.9%;
-  --radius: 0.5rem;
 }
 
 @layer base {
@@ -56,103 +57,135 @@
   }
   
   body {
-    @apply bg-neutral-50 text-primary font-['Inter',sans-serif] antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
+    line-height: 1.5;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-['Montserrat',sans-serif] font-bold;
+    font-family: 'Montserrat', sans-serif;
+    @apply font-bold;
   }
-  
-  .font-bebas {
-    font-family: 'Bebas Neue', cursive;
-    letter-spacing: 0.05em;
+
+  /* Force styles to ensure they're applied */
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 }
 
 @layer components {
+  .font-bebas {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+  }
+
   .custom-cursor {
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23E53E3E"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/></svg>') 12 12, auto;
   }
-  
+
   .nav-link {
-    position: relative;
+    @apply relative transition-colors duration-300;
   }
-  
+
   .nav-link::after {
     content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: hsl(var(--secondary));
-    transition: width 0.3s ease;
+    @apply absolute w-0 h-0.5 -bottom-0.5 left-0 bg-secondary transition-all duration-300;
   }
-  
+
   .nav-link:hover::after,
   .nav-link.active::after {
-    width: 100%;
+    @apply w-full;
   }
-  
+
   .btn-primary {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    @apply relative overflow-hidden z-10 bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-secondary/90;
   }
-  
+
   .btn-primary::after {
     content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.2);
-    width: 5px;
-    height: 100%;
-    top: 0;
-    left: -10px;
-    transform: skewX(-15deg);
-    transition: all 0.5s ease;
-    z-index: -1;
+    @apply absolute top-0 -left-2.5 w-1 h-full bg-white/20 transform -skew-x-12 transition-all duration-500 -z-10;
   }
-  
+
   .btn-primary:hover::after {
-    width: 120%;
-    left: -10%;
+    @apply w-full left-0 skew-x-0;
   }
-  
+
   .card-hover {
-    transition: all 0.3s ease;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
   }
-  
-  .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-  
+
   .gallery-item {
-    transition: all 0.5s ease;
-    cursor: pointer;
+    @apply transition-all duration-500 cursor-pointer hover:scale-105 hover:z-10;
   }
-  
-  .gallery-item:hover {
-    transform: scale(1.03);
-    z-index: 10;
+
+  /* Fitness-specific styles */
+  .hero-section {
+    @apply min-h-screen bg-gradient-to-r from-black via-gray-900 to-black text-white;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-center mb-8;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .fitness-card {
+    @apply bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300;
   }
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+@layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground));
+    border-radius: 0.375rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--secondary));
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+/* Utility classes to force Tailwind to include them */
+@layer utilities {
+  .bg-background {
+    background-color: hsl(var(--background)) !important;
+  }
+  
+  .text-foreground {
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  .border-border {
+    border-color: hsl(var(--border)) !important;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
+  .bg-secondary {
+    background-color: hsl(var(--secondary)) !important;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--secondary));
+  .text-secondary-foreground {
+    color: hsl(var(--secondary-foreground)) !important;
+  }
+
+  /* Force common classes to be included */
+  .min-h-screen { min-height: 100vh !important; }
+  .text-center { text-align: center !important; }
+  .font-bold { font-weight: 700 !important; }
+  .rounded-lg { border-radius: 0.5rem !important; }
+  .p-6 { padding: 1.5rem !important; }
+  .mb-8 { margin-bottom: 2rem !important; }
+  .flex { display: flex !important; }
+  .items-center { align-items: center !important; }
+  .justify-center { justify-content: center !important; }
 }

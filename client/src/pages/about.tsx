@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export default function About() {
   useEffect(() => {
     // Update page title for SEO
-    document.title = "About | FitSync - Professional Fitness Training";
+    document.title = "About | FitSync - Content Creator";
   }, []);
 
   return (
@@ -25,14 +25,12 @@ export default function About() {
             About <span className="text-secondary">FitSync</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Learn more about our professional fitness services and the expertise we bring to help you achieve your goals.
-          </p>
+          Learn more about our Content Creator, their journey, and the vision behind FitSync.          </p>
         </div>
       </div>
       
       <Bio />
-      <Skills />
-      <Services />
+    
     </motion.div>
   );
 }

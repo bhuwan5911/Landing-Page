@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { pageTransition, fadeIn, staggerContainer } from "@/lib/animations";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import mainImage from "../assets/WhatsApp Image 2025-05-21 at 22.11.33_715892f8.
 export default function Home() {
   useEffect(() => {
     // Update page title for SEO
-    document.title = "HeyJatin | Personal Fitness & Content Creator";
+    document.title = "CreatorXJatin | Personal Fitness & Content Creator";
   }, []);
 
   return (
@@ -36,15 +36,15 @@ export default function Home() {
               className="w-full md:w-1/2 mb-12 md:mb-0"
             >
               <h1 className="text-4xl md:text-6xl font-montserrat font-black mb-6 leading-tight">
-                <span className="text-secondary">HeyJatin</span> Fitness Journey
+                <span className="text-secondary">CreatorXJatin</span> 
               </h1>
               
               <p className="text-lg md:text-xl mb-8 text-gray-300">
-                Content creator and fitness enthusiast. I help people achieve their fitness goals through professional guidance and motivation.
+                Content creator and fitness enthusiast. I share my journey and tips to inspire others.
               </p>
               
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Link href="/contact">
+                <Link to="/contact">
                   <Button className="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg btn-primary">
                     Contact Me
                   </Button>
@@ -53,7 +53,7 @@ export default function Home() {
               
               <div className="mt-8 flex items-center space-x-4">
                 <div className="flex space-x-4">
-                  <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-secondary p-3 rounded-full transition-all duration-300">
+                  <a href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-secondary p-3 rounded-full transition-all duration-300">
                     <FaInstagram className="text-white text-xl" />
                   </a>
                   <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-secondary p-3 rounded-full transition-all duration-300">
@@ -116,9 +116,9 @@ export default function Home() {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold mb-2">Motorcycle Enthusiast</h3>
+              <h3 className="text-xl font-bold mb-2">Content Creator</h3>
               <p className="text-gray-600">
-                When I'm not in the gym, you'll find me exploring on my Royal Enfield. I believe in balance - fitness is a lifestyle that complements all your passions.
+                When I'm not in the gym, you'll find me exploring on my happiness. I believe in balance - fitness is a lifestyle that complements all your passions.
               </p>
             </motion.div>
 
@@ -128,14 +128,14 @@ export default function Home() {
             >
               <div className="relative h-[400px] mb-6 overflow-hidden rounded-lg">
                 <img 
-                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.33_a2834af8.jpg"
+                  src="/src/assets/4.jpg"
                   alt="Jatin at the gym" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold mb-2">Fitness Coach</h3>
+              <h3 className="text-xl font-bold mb-2">Fitness Creator</h3>
               <p className="text-gray-600">
-                With years of experience in fitness training, I create personalized workout plans that help you achieve real results. My approach focuses on sustainable fitness habits.
+                With years of experience in Content Creation, I create engaging fitness content that inspires and educates my audience. My approach focuses on sustainable fitness habits.
               </p>
             </motion.div>
           </div>
@@ -173,15 +173,15 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Instagram</h3>
               <p className="text-gray-600 mb-4">
-                Daily fitness motivation, workout tips, and lifestyle content.
+              I create fitness and lifestyle content across multiple platforms. Follow me for workout tips, motivation, and behind-the-scenes content.
               </p>
               <a 
-                href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" 
+                href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block text-secondary font-medium hover:underline"
               >
-                @heyjatix
+                @officialjxtin
               </a>
             </motion.div>
 
@@ -232,7 +232,7 @@ export default function Home() {
             variants={fadeIn('up', 'tween', 0.6, 1)}
             className="text-center mt-12"
           >
-            <Link href="/contact">
+            <Link to="/contact">
               <Button className="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg">
                 Contact Me
               </Button>

@@ -25,7 +25,7 @@ export default function Bio() {
             />
             <div className="flex justify-center mt-6 space-x-4">
               <a 
-                href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" 
+                href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white shadow-md rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
@@ -60,42 +60,42 @@ export default function Bio() {
             </h2>
             
             <p className="text-gray-700 mb-4 text-lg">
-              I'm a certified fitness trainer with over 10 years of experience helping clients transform their bodies and lives through personalized fitness programs.
+              I'm a  Fitness Lover with content creator
             </p>
             
             <p className="text-gray-700 mb-4 text-lg">
-              My approach combines strength training, cardiovascular conditioning, and nutrition planning to create holistic fitness solutions that deliver lasting results.
+              My approach combines strength , endurance to be fit.
             </p>
             
             <p className="text-gray-700 mb-6 text-lg">
-              As a motorcycle enthusiast, I've also developed specialized fitness programs for riders looking to improve their endurance and performance on the road.
+              Try to become a good human and good fitness influencer
             </p>
-            
+
             <div className="bg-white p-6 rounded-lg shadow-md mb-8">
               <h3 className="text-xl font-bold mb-4 text-primary">Certifications</h3>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-secondary rounded-full mr-3"></span>
-                  National Academy of Sports Medicine (NASM) Certified Personal Trainer
+                  Eat healthy and stay fit
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-secondary rounded-full mr-3"></span>
-                  Precision Nutrition Level 2 Coach
+                 Do yo workout and stay fit
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-secondary rounded-full mr-3"></span>
-                  Functional Movement Specialist (FMS)
+                  Be a good human and help others
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-secondary rounded-full mr-3"></span>
-                  TRX Suspension Training Certified
+                  Be a good fitness influencer
                 </li>
               </ul>
             </div>
             
             <Button className="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg flex items-center">
               <FaDownload className="mr-2" />
-              Download Resume
+              
             </Button>
           </motion.div>
         </div>

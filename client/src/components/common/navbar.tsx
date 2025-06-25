@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "react-router-dom";
 import { FaInstagram, FaYoutube, FaBars, FaTimes } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
-  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,24 +30,27 @@ export default function Navbar() {
     <nav className={`bg-primary text-white sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-md py-3' : 'py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <Link href="/">
-            <span className="text-secondary text-2xl font-bebas tracking-wide">HeyJatin</span>
+          <Link to="/login">
+            <span className="text-3xl cursor-pointer" title="Dashboard Login">🔒</span>
           </Link>
-          <span className="text-xs text-gray-400 mt-1">BETA</span>
+          <Link to="/">
+            <span className="text-secondary text-2xl font-bebas tracking-wide cursor-pointer">CreatorXJatin</span>
+          </Link>
+          <span className="text-xs text-gray-400 mt-1"></span>
         </div>
         
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <Link key={link.path} href={link.path}>
-              <a className={`nav-link font-medium hover:text-secondary transition-all ${location === link.path ? 'active' : ''}`}>
+            <Link key={link.path} to={link.path}>
+              <span className={`nav-link font-medium hover:text-secondary transition-all cursor-pointer`}>
                 {link.name}
-              </a>
+              </span>
             </Link>
           ))}
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
-          <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+          <a href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
             <FaInstagram className="text-xl" />
           </a>
           <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
@@ -57,7 +59,7 @@ export default function Navbar() {
           <a href="https://youtube.com/@officialfitjatin?si=Bo8-7DUFNxj-Et_5" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
             <FaYoutube className="text-xl" />
           </a>
-          <Link href="/contact">
+          <Link to="/contact">
             <Button className="bg-secondary hover:bg-red-700 text-white font-bold shadow-lg btn-primary">
               Get Started
             </Button>
@@ -84,17 +86,17 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
               {navLinks.map((link) => (
-                <Link key={link.path} href={link.path}>
-                  <a 
-                    className={`text-white hover:text-secondary py-2 ${location === link.path ? 'text-secondary' : ''}`}
+                <Link key={link.path} to={link.path}>
+                  <span 
+                    className={`text-white hover:text-secondary py-2 cursor-pointer block`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
-                  </a>
+                  </span>
                 </Link>
               ))}
               <div className="flex items-center space-x-4 pt-2">
-                <a href="https://www.instagram.com/heyjatix?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
+                <a href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
                   <FaInstagram className="text-xl" />
                 </a>
                 <a href="https://youtube.com/@creatorxjatin?si=jpfRwLMfvAyTlgMf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all">
@@ -104,7 +106,7 @@ export default function Navbar() {
                   <FaYoutube className="text-xl" />
                 </a>
               </div>
-              <Link href="/contact">
+              <Link to="/contact">
                 <Button 
                   className="bg-secondary hover:bg-red-700 text-white font-bold shadow-lg btn-primary w-full mt-2"
                   onClick={() => setMobileMenuOpen(false)}

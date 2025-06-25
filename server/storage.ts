@@ -1,4 +1,41 @@
-import { type Message, type InsertMessage } from "@shared/schema";
+import { MongoClient, Db, Collection } from 'mongodb';
+
+export class MongoStorage implements IStorage {
+  private db: Db;
+  private collection: Collection<Message>;
+
+  constructor(mongoUrl: string, dbName: string) {
+    const client = new MongoClient(mongoUrl);
+    this.db = client.db(dbName);
+    this.collection = this.db.collection('messages');
+  }
+
+  async createMessage(insertMessage: InsertMessage): Promise<Message> {
+    const message = {
+      ...insertMessage,
+      id: Date.now(), // or use MongoDB ObjectId
+      createdAt: new Date().toISOString()
+    };
+    await this.collection.insertOne(message);
+    return message;
+  }
+
+  
+export type Message = {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  createdAt: string;
+};
+
+export type InsertMessage = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
 export interface IStorage {
   getAllMessages(): Promise<Message[]>;

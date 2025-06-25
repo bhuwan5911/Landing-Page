@@ -1,20 +1,13 @@
-import { pgTable, text, serial, integer, boolean } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { z } from "zod";
+import path from "path";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-export const messages = pgTable("messages", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull(),
-  subject: text("subject").notNull(),
-  message: text("message").notNull(),
-  createdAt: text("created_at").notNull().default(new Date().toISOString()),
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@shared": path.resolve(__dirname, "../shared"), 
+    },
+  },
 });
-
-export const insertMessageSchema = createInsertSchema(messages).omit({
-  id: true,
-  createdAt: true,
-});
-
-export type InsertMessage = z.infer<typeof insertMessageSchema>;
-export type Message = typeof messages.$inferSelect;
