@@ -5,7 +5,6 @@ import Login from "./pages/login";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy } from "react";
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
@@ -19,26 +18,24 @@ const Contact = lazy(() => import("@/pages/contact"));
 
 function AppRouter() {
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-12 w-12 border-4 border-secondary rounded-full border-t-transparent"></div></div>}>
-        <Router>
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </Router>
-      </Suspense>
-    </AnimatePresence>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-12 w-12 border-4 border-secondary rounded-full border-t-transparent"></div></div>}>
+      <Router>
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </Suspense>
   );
 }
 
