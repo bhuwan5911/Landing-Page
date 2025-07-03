@@ -27,16 +27,14 @@ app.use(express.urlencoded({ extended: true }));
     // Register all routes
     await registerRoutes(app);
 
-    // Serve static files from React build
-    if (process.env.NODE_ENV === "production") {
-      const __filename = fileURLToPath(import.meta.url);
-      const __dirname = path.dirname(__filename);
-      const clientBuildPath = path.join(__dirname, "../client/dist");
-      app.use(express.static(clientBuildPath));
-      app.get("*", (req, res) => {
-        res.sendFile(path.join(clientBuildPath, "index.html"));
-      });
-    }
+    // Serve static files from React build (always, not just in production)
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const clientBuildPath = path.join(__dirname, "../client/dist");
+    app.use(express.static(clientBuildPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(clientBuildPath, "index.html"));
+    });
 
     // Start server
     server.listen(Number(PORT), '0.0.0.0', () => {
