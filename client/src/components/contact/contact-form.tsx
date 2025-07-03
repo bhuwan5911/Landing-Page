@@ -97,7 +97,7 @@ export default function ContactForm() {
         </div>
       </div>
       
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <motion.div 
           variants={staggerContainer}
           initial="hidden"
@@ -125,13 +125,13 @@ export default function ContactForm() {
               <div className="mb-10">
                 <h4 className="font-bold mb-4">Connect on Social Media</h4>
                 <div className="flex space-x-4">
-                  <a href="https://www.instagram.com/heyjatix" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+                  <a href="https://www.instagram.com/heyjatix" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                     <FaInstagram className="text-xl" />
                   </a>
-                  <a href="https://youtube.com/@creatorxjatin" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+                  <a href="https://youtube.com/@creatorxjatin" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                     <FaYoutube className="text-xl" />
                   </a>
-                  <a href="https://youtube.com/@officialfitjatin" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+                  <a href="https://youtube.com/@officialfitjatin" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                     <FaYoutube className="text-xl" />
                   </a>
                 </div>
@@ -142,7 +142,7 @@ export default function ContactForm() {
               variants={fadeIn('left', 'tween', 0.4, 1)}
               className="w-full lg:w-1/2"
             >
-              <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 text-black dark:text-white">
                 <h3 className="text-2xl font-bold mb-6 text-center">Send me a message</h3>
                 
                 <Form {...form}>
@@ -152,11 +152,11 @@ export default function ContactForm() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Full Name</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-200 font-medium">Full Name</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="Your name" 
-                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" 
+                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500" 
                               {...field} 
                             />
                           </FormControl>
@@ -170,12 +170,12 @@ export default function ContactForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Email Address</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-200 font-medium">Email Address</FormLabel>
                           <FormControl>
                             <Input 
                               type="email" 
                               placeholder="your.email@example.com" 
-                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" 
+                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500" 
                               {...field} 
                             />
                           </FormControl>
@@ -189,21 +189,19 @@ export default function ContactForm() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Subject</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-200 font-medium">Subject</FormLabel>
                           <Select 
                             onValueChange={field.onChange} 
                             defaultValue={field.value}
                           >
                             <FormControl>
-                              <SelectTrigger className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all">
+                              <SelectTrigger className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
                                 <SelectValue placeholder="Select a subject" />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent>
+                            <SelectContent className="bg-white dark:bg-gray-800 text-black dark:text-white">
                               <SelectItem value="Fitness Consultation">Fitness Consultation</SelectItem>
-                              <SelectItem value="Content Creation">Content Creation</SelectItem>
-                              <SelectItem value="Business Inquiry">Business Inquiry</SelectItem>
-                              <SelectItem value="Collaboration">Collaboration</SelectItem>
+                              <SelectItem value="Content Collaboration">Content Collaboration</SelectItem>
                               <SelectItem value="Other">Other</SelectItem>
                             </SelectContent>
                           </Select>
@@ -217,11 +215,11 @@ export default function ContactForm() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Message</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-200 font-medium">Message</FormLabel>
                           <FormControl>
                             <Textarea 
                               placeholder="How can I help you?" 
-                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all h-32 resize-none" 
+                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 min-h-[120px]" 
                               {...field} 
                             />
                           </FormControl>
@@ -229,22 +227,8 @@ export default function ContactForm() {
                         </FormItem>
                       )}
                     />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-secondary hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center"
-                      disabled={mutation.isPending}
-                    >
-                      {mutation.isPending ? (
-                        <>
-                          <span className="animate-spin mr-2">⏳</span>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message <span className="ml-2">✉️</span>
-                        </>
-                      )}
+                    <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-lg shadow-lg btn-primary transition-all duration-200">
+                      {mutation.isLoading ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </Form>

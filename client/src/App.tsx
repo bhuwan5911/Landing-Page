@@ -10,6 +10,7 @@ import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import NotFound from "@/pages/not-found";
 import { AuthProvider } from "./hooks/use-auth";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("@/pages/home"));
@@ -26,7 +27,7 @@ function AppRouter() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<ThemeProvider><Dashboard /></ThemeProvider>} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />

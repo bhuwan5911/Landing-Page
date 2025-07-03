@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-black transition-colors duration-500">
       <motion.div
         initial={{ scale: 0.9 }}
         animate={{ scale: [0.9, 1.1, 0.9], boxShadow: [
@@ -67,26 +67,26 @@ const Login = () => {
       </motion.div>
       <form
         onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-900 shadow-lg rounded-xl p-8 w-full max-w-md animate-fade-in"
+        className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md animate-fade-in text-black"
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-primary">Admin Login</h2>
         {error && <div className="mb-4 text-red-500 text-center">{error}</div>}
         <div className="mb-4">
-          <label className="block mb-1 font-medium">Email</label>
+          <label className="block mb-1 font-medium text-gray-700">Email</label>
           <input
             type="email"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none dark:bg-gray-800 dark:text-white"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none bg-white text-black placeholder-gray-400"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-1 font-medium">Password</label>
+          <label className="block mb-1 font-medium text-gray-700">Password</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none dark:bg-gray-800 dark:text-white"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none bg-white text-black placeholder-gray-400"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
@@ -109,9 +109,7 @@ const Login = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
         <div className="mt-4 text-center">
-          <Link to="/forgot-password" className="text-blue-500 hover:underline">
-            Forgot password?
-          </Link>
+          <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot password?</a>
         </div>
       </form>
     </div>

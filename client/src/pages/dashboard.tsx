@@ -12,6 +12,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt, FaChartLine, FaUserClock } from "react-icons/fa";
 import logoImg from "../assets/WhatsApp Image 2025-05-21 at 22.11.33_f363f5ff.jpg";
 import * as RechartsPrimitive from "recharts";
+import { DateRange } from "react-day-picker";
 
 interface Contact {
   _id: string;
@@ -62,7 +63,7 @@ const Dashboard = () => {
   const [stats, setStats] = React.useState<ContactStats | null>(null);
   const [trends, setTrends] = React.useState<TrendPoint[] | null>(null);
   const [recent, setRecent] = React.useState<RecentContact[] | null>(null);
-  const [range, setRange] = React.useState<{ from: Date | undefined; to: Date | undefined }>({ from: undefined, to: undefined });
+  const [range, setRange] = React.useState<DateRange | undefined>(undefined);
   const [rangeCount, setRangeCount] = React.useState<number | null>(null);
   const [trendRange, setTrendRange] = React.useState<'day' | 'week' | 'month' | 'year'>('week');
 
@@ -123,6 +124,7 @@ const Dashboard = () => {
     if (range && range.from && range.to) {
       const fetchRange = async () => {
         try {
+          if (!range.from || !range.to) return;
           const fromStr = format(range.from, 'yyyy-MM-dd');
           const toStr = format(range.to, 'yyyy-MM-dd');
           const res = await fetch(`/api/contacts/stats-range?from=${fromStr}&to=${toStr}`);
@@ -178,13 +180,13 @@ const Dashboard = () => {
       style={{ transition: 'background 0.7s, color 0.7s' }}
     >
       <div
-        className={`w-full max-w-5xl shadow-xl rounded-xl p-4 sm:p-8 ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'} transition-colors duration-700`}
-        style={{ background: isDark ? '#181e29' : 'white', color: isDark ? 'white' : 'black', transition: 'background 0.7s, color 0.7s' }}
+        className={`w-full max-w-5xl shadow-xl rounded-xl p-4 sm:p-8 bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-700`}
+        style={{ transition: 'background 0.7s, color 0.7s' }}
       >
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
           <div className="flex items-center gap-3">
             <img src={logoImg} alt="CreatorXJatin Logo" className="w-12 h-12 rounded-full object-cover border-2 border-blue-500 shadow" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-primary" style={{ color: isDark ? 'white' : 'black' }}>Dashboard</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-primary dark:text-white">Dashboard</h1>
           </div>
           <div className="flex gap-2 flex-wrap">
             <button
@@ -312,7 +314,7 @@ const Dashboard = () => {
               mode="range"
               selected={range}
               onSelect={setRange}
-              numberOfMonths={2}
+              numberOfMonths={1}
               className="bg-white dark:bg-gray-900 rounded-lg shadow p-2"
             />
           </div>
@@ -320,7 +322,7 @@ const Dashboard = () => {
             {range && range.from && range.to && (
               <div className="text-lg font-semibold">
                 Contacts: <span className="text-blue-600 dark:text-blue-400">{rangeCount !== null ? rangeCount : <Skeleton className="h-6 w-10 inline-block" />}</span>
-                <span className="ml-2 text-xs opacity-70">({format(range.from, 'MMM d, yyyy')} - {format(range.to, 'MMM d, yyyy')})</span>
+                <span className="ml-2 text-xs opacity-70">({range.from && range.to ? `${format(range.from, 'MMM d, yyyy')} - ${format(range.to, 'MMM d, yyyy')}` : ''})</span>
               </div>
             )}
           </div>
