@@ -39,7 +39,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export default function ContactForm() {
   useEffect(() => {
-    document.title = "Contact | HeyJatin - Personal Fitness & Content Creator";
+    document.title = "Contact | CreatorXJatin - Personal Fitness & Content Creator";
   }, []);
 
   const { toast } = useToast();
@@ -125,7 +125,7 @@ export default function ContactForm() {
               <div className="mb-10">
                 <h4 className="font-bold mb-4">Connect on Social Media</h4>
                 <div className="flex space-x-4">
-                  <a href="https://www.instagram.com/heyjatix" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
+                  <a href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
                     <FaInstagram className="text-xl" />
                   </a>
                   <a href="https://youtube.com/@creatorxjatin" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
