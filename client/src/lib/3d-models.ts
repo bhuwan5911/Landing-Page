@@ -1,11 +1,10 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export interface Scene3D {
   scene: THREE.Scene;
   camera: THREE.PerspectiveCamera;
   renderer: THREE.WebGLRenderer;
-  controls: OrbitControls;
+  controls: any;
   animate: () => void;
   cleanup: () => void;
 }
@@ -29,10 +28,13 @@ export const setupMotorcycleScene = (container: HTMLDivElement): Scene3D => {
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
   
-  // Controls
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.25;
+  // Controls - simplified for now
+  const controls = {
+    update: () => {},
+    dispose: () => {},
+    enableDamping: true,
+    dampingFactor: 0.25
+  };
   
   // Create a simple motorcycle placeholder with geometry
   const geometry = new THREE.BoxGeometry(2, 1, 4);
@@ -118,10 +120,13 @@ export const setupGymScene = (container: HTMLDivElement): Scene3D => {
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
   
-  // Controls
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.25;
+  // Controls - simplified for now
+  const controls = {
+    update: () => {},
+    dispose: () => {},
+    enableDamping: true,
+    dampingFactor: 0.25
+  };
   
   // Create a simple gym equipment placeholder with geometry
   const benchGeometry = new THREE.BoxGeometry(2, 0.3, 4);

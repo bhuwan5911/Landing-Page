@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { pageTransition } from "@/lib/animations";
-import Services from "@/components/about/services";
 import Bio from "@/components/about/bio";
-import Skills from "@/components/about/skills";
 import { useEffect } from "react";
 
 export default function About() {

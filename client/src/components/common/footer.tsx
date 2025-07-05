@@ -46,15 +46,11 @@ export default function Footer() {
           </p>
 
           <div className="flex space-x-6">
-            <Link href="/">
-              {(href) => (
-                <a href={href} className="text-gray-500 hover:text-gray-300 text-sm">Home</a>
-              )}
+            <Link href="/" className="text-gray-500 hover:text-gray-300 text-sm">
+              Home
             </Link>
-            <Link href="/contact">
-              {(href) => (
-                <a href={href} className="text-gray-500 hover:text-gray-300 text-sm">Contact</a>
-              )}
+            <Link href="/contact" className="text-gray-500 hover:text-gray-300 text-sm">
+              Contact
             </Link>
           </div>
         </div>
