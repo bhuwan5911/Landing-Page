@@ -12,7 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -23,6 +23,18 @@ const Login = () => {
     } else {
       setError("Invalid email or password");
     }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((s: boolean) => !s);
   };
 
   return (
@@ -77,7 +89,7 @@ const Login = () => {
             type="email"
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none bg-white text-black placeholder-gray-400"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
         </div>
@@ -88,13 +100,13 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none bg-white text-black placeholder-gray-400"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               required
             />
             <button
               type="button"
               className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowPassword(s => !s)}
+              onClick={togglePasswordVisibility}
               tabIndex={-1}
             >
               {showPassword ? "Hide" : "Show"}

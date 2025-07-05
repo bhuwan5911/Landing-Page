@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const token = searchParams.get("token");
   const email = searchParams.get("email");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -46,6 +46,18 @@ const ResetPassword = () => {
     setLoading(false);
   };
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((s: boolean) => !s);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-300 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <form
@@ -62,7 +74,7 @@ const ResetPassword = () => {
               type={showPassword ? "text" : "password"}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-800 dark:text-white"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               minLength={6}
               required
               autoComplete="new-password"
@@ -70,7 +82,7 @@ const ResetPassword = () => {
             <button
               type="button"
               className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowPassword(s => !s)}
+              onClick={togglePasswordVisibility}
               tabIndex={-1}
             >
               {showPassword ? "Hide" : "Show"}
@@ -83,7 +95,7 @@ const ResetPassword = () => {
             type={showPassword ? "text" : "password"}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-800 dark:text-white"
             value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
+            onChange={handleConfirmPasswordChange}
             minLength={6}
             required
             autoComplete="new-password"

@@ -250,7 +250,7 @@ const Dashboard = () => {
               <span>Trends</span>
               <select
                 value={trendRange}
-                onChange={e => setTrendRange(e.target.value as any)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTrendRange(e.target.value as any)}
                 className="ml-2 px-2 py-1 rounded border border-gray-300 dark:bg-gray-900 dark:text-white text-sm"
                 style={{ minWidth: 120 }}
               >

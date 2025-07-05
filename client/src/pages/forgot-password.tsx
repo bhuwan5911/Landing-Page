@@ -6,7 +6,7 @@ const ForgotPassword = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
@@ -29,6 +29,10 @@ const ForgotPassword = () => {
     setLoading(false);
   };
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-pink-300 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <form
@@ -44,7 +48,7 @@ const ForgotPassword = () => {
             type="email"
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-pink-500 focus:outline-none dark:bg-gray-800 dark:text-white"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
         </div>
