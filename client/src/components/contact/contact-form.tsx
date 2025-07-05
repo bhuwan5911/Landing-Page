@@ -228,7 +228,7 @@ export default function ContactForm() {
                       )}
                     />
                     <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-lg shadow-lg btn-primary transition-all duration-200">
-                      {mutation.isLoading ? "Sending..." : "Send Message"}
+                      {mutation.status === "pending" ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </Form>
