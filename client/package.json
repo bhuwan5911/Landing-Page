@@ -65,6 +65,7 @@
     "@types/cors": "^2.8.19",
     "@types/three": "^0.178.0",
     "@vitejs/plugin-react": "^4.6.0",
+    "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }
 }
