@@ -178,6 +178,10 @@
     color: hsl(var(--secondary-foreground)) !important;
   }
 
+  .text-secondary {
+    color: hsl(var(--secondary)) !important;
+  }
+
   /* Force common classes to be included */
   .min-h-screen { min-height: 100vh !important; }
   .text-center { text-align: center !important; }

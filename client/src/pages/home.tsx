@@ -97,7 +97,7 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-5xl font-montserrat font-bold mb-4">
-              About <span className="text-secondary">Me</span>
+              <span className="text-gray-900">About</span> <span className="text-secondary">Me</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               I'm a fitness enthusiast and content creator with a passion for helping others achieve their fitness goals.
@@ -156,7 +156,7 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-5xl font-montserrat font-bold mb-4">
-              Content <span className="text-secondary">Creator</span>
+              <span className="text-gray-900">Content</span> <span className="text-secondary">Creator</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               I create fitness and lifestyle content across multiple platforms. Follow me for workout tips, motivation, and behind-the-scenes content.
