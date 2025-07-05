@@ -73,7 +73,7 @@
     "@types/three": "^0.178.0",
     "@vitejs/plugin-react": "^4.6.0",
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.11",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }
