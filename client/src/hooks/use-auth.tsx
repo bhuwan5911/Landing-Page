@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { apiCall } from "../lib/api";
 
 interface AuthContextType {
   user: string | null;
@@ -16,12 +17,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Dummy login logic (replace with real API call)
   const login = async (email: string, password: string) => {
     try {
-      const res = await fetch("/api/login", {
+      const res = await apiCall("/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      if (res.ok) {
+      if (res && res.success) {
         setUser(email);
         localStorage.setItem("auth_user", email);
         return true;
