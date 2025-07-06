@@ -20,7 +20,16 @@ export class MongoStorage implements IStorage {
     return message;
   }
 
-  
+  async getAllMessages(): Promise<Message[]> {
+    return await this.collection.find().toArray();
+  }
+
+  async getMessageById(id: number): Promise<Message | undefined> {
+    const msg = await this.collection.findOne({ id });
+    return msg || undefined;
+  }
+}
+
 export type Message = {
   id: number;
   name: string;
