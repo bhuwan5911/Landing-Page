@@ -1,5 +1,5 @@
 import express from "express";
-import type { Request, Response } from "express";
+import type { Request, Response, RequestHandler } from "express";
 import { z, ZodError } from "zod";
 import Contact from "./models/contactModel";
 import User from "./models/userModel";
@@ -16,7 +16,7 @@ const messageValidationSchema = z.object({
 
 const router = express.Router();
 
-router.post("/api/contact", async (req: Request, res: Response) => {
+router.post("/api/contact", (async (req, res) => {
   try {
     const messageData = messageValidationSchema.parse(req.body);
     // Save to MongoDB
@@ -73,9 +73,9 @@ router.post("/api/contact", async (req: Request, res: Response) => {
     const errorStack = error instanceof Error ? error.stack : undefined;
     res.status(500).json({ message: "Server error", error: errorMessage, stack: errorStack });
   }
-});
+}) as RequestHandler);
 
-router.get("/api/contacts", async (_req: Request, res: Response) => {
+router.get("/api/contacts", (async (_req, res) => {
   try {
     const contacts = await Contact.find({});
     res.status(200).json(contacts);
@@ -84,9 +84,9 @@ router.get("/api/contacts", async (_req: Request, res: Response) => {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     res.status(500).json({ message: "Server error", error: errorMessage });
   }
-});
+}) as RequestHandler);
 
-router.get("/api/contacts/stats", async (_req: Request, res: Response) => {
+router.get("/api/contacts/stats", (async (_req, res) => {
   try {
     const now = new Date();
     // Start of today
@@ -108,9 +108,9 @@ router.get("/api/contacts/stats", async (_req: Request, res: Response) => {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     res.status(500).json({ message: "Failed to fetch stats", error: errorMessage });
   }
-});
+}) as RequestHandler);
 
-router.post("/api/forgot-password", async (req: Request, res: Response) => {
+router.post("/api/forgot-password", (async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ message: "Email is required" });
   try {
@@ -168,7 +168,7 @@ router.post("/api/forgot-password", async (req: Request, res: Response) => {
     console.error("Forgot password error:", error);
     res.status(500).json({ message: "Server error" });
   }
-});
+}) as RequestHandler);
 
 router.post("/api/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
