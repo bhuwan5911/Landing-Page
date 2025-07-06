@@ -3,7 +3,7 @@
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./db";
-import { registerRoutes } from "./routes";
+import router from "./routes";
 import { createServer } from "http";
 import dotenv from "dotenv";
 import path from "path";
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
     const server = createServer(app);
 
     // Register all routes
-    app.use(registerRoutes());
+    app.use(router);
 
     // Serve static files from React build (always, not just in production)
     const __dirname = path.resolve();
