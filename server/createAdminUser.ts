@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || '';
+// Hardcoded MongoDB URI with database name
+const MONGODB_URI = 'mongodb+srv://bhuwank301:NLEA3zwE9cnPvKzz@cluster0.lmv9h0b.mongodb.net/productpulse?retryWrites=true&w=majority&appName=Cluster0';
+console.log('MONGODB_URI:', MONGODB_URI);
+
 const ADMIN_EMAIL = 'jatinin567@gmail.com'; 
 const ADMIN_PASSWORD = 'MONEY777'; 
 
