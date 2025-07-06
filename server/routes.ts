@@ -1,5 +1,5 @@
-import express, { type Express, Router } from "express";
-import { createServer, type Server } from "http";
+import express from "express";
+import type { Request, Response, Router } from "express";
 import { z, ZodError } from "zod";
 import Contact from "./models/contactModel";
 import User from "./models/userModel";
@@ -15,9 +15,9 @@ const messageValidationSchema = z.object({
 });
 
 export function registerRoutes(): Router {
-  const router = Router();
+  const router = express.Router();
 
-  router.post("/api/contact", async (req, res) => {
+  router.post("/api/contact", async (req: Request, res: Response) => {
     try {
       const messageData = messageValidationSchema.parse(req.body);
       // Save to MongoDB
@@ -75,7 +75,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.get("/api/contacts", async (_req, res) => {
+  router.get("/api/contacts", async (_req: Request, res: Response) => {
     try {
       const contacts = await Contact.find({});
       res.status(200).json(contacts);
@@ -86,7 +86,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.get("/api/contacts/stats", async (_req, res) => {
+  router.get("/api/contacts/stats", async (_req: Request, res: Response) => {
     try {
       const now = new Date();
       // Start of today
@@ -110,7 +110,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.post("/api/forgot-password", async (req, res) => {
+  router.post("/api/forgot-password", async (req: Request, res: Response) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: "Email is required" });
     try {
@@ -170,7 +170,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.post("/api/login", async (req, res) => {
+  router.post("/api/login", async (req: Request, res: Response) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ message: "Email and password required" });
     try {
@@ -185,7 +185,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.post("/api/test-email", async (req, res) => {
+  router.post("/api/test-email", async (req: Request, res: Response) => {
     try {
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -218,7 +218,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.delete("/api/contacts/:id", async (req, res) => {
+  router.delete("/api/contacts/:id", async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       await Contact.findByIdAndDelete(id);
@@ -228,7 +228,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.post("/api/reset-password", async (req, res) => {
+  router.post("/api/reset-password", async (req: Request, res: Response) => {
     const { token, email, password } = req.body;
     if (!token || !email || !password) {
       return res.status(400).json({ message: "Missing required fields." });
@@ -250,7 +250,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.get("/api/contacts/trends", async (req, res) => {
+  router.get("/api/contacts/trends", async (req: Request, res: Response) => {
     try {
       const now = new Date();
       const range = req.query.range || 'week';
@@ -331,7 +331,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.get("/api/contacts/recent", async (_req, res) => {
+  router.get("/api/contacts/recent", async (_req: Request, res: Response) => {
     try {
       const recent = await Contact.find({}, "name createdAt").sort({ createdAt: -1 }).limit(5);
       res.json(recent);
@@ -341,7 +341,7 @@ export function registerRoutes(): Router {
     }
   });
 
-  router.get("/api/contacts/stats-range", async (req, res) => {
+  router.get("/api/contacts/stats-range", async (req: Request, res: Response) => {
     try {
       const { from, to } = req.query;
       if (!from || !to) return res.status(400).json({ message: "Missing from or to date" });
