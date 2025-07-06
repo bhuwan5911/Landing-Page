@@ -13,6 +13,7 @@ import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt, FaChartLine, FaUserClock 
 const logoImg = "/4.jpg";
 import * as RechartsPrimitive from "recharts";
 import { DateRange } from "react-day-picker";
+import { apiCall } from "../lib/api";
 
 interface Contact {
   _id: string;
@@ -79,8 +80,7 @@ const Dashboard = () => {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch("/api/contacts");
-        const data = await res.json();
+        const data = await apiCall("/contacts");
         setContacts(data);
       } catch (err) {
         setError("Failed to fetch contacts");
@@ -89,8 +89,7 @@ const Dashboard = () => {
     };
     const fetchStats = async () => {
       try {
-        const res = await fetch("/api/contacts/stats");
-        const data = await res.json();
+        const data = await apiCall("/contacts/stats");
         setStats(data);
       } catch (err) {
         // ignore
@@ -98,8 +97,7 @@ const Dashboard = () => {
     };
     const fetchRecent = async () => {
       try {
-        const res = await fetch("/api/contacts/recent");
-        const data = await res.json();
+        const data = await apiCall("/contacts/recent");
         setRecent(data);
       } catch {}
     };
@@ -112,8 +110,7 @@ const Dashboard = () => {
     // Only fetch trends when trendRange changes
     const fetchTrends = async () => {
       try {
-        const res = await fetch(`/api/contacts/trends?range=${trendRange}`);
-        const data = await res.json();
+        const data = await apiCall(`/contacts/trends?range=${trendRange}`);
         setTrends(data);
       } catch {}
     };
@@ -127,8 +124,7 @@ const Dashboard = () => {
           if (!range.from || !range.to) return;
           const fromStr = format(range.from, 'yyyy-MM-dd');
           const toStr = format(range.to, 'yyyy-MM-dd');
-          const res = await fetch(`/api/contacts/stats-range?from=${fromStr}&to=${toStr}`);
-          const data = await res.json();
+          const data = await apiCall(`/contacts/stats-range?from=${fromStr}&to=${toStr}`);
           setRangeCount(data.count);
         } catch { setRangeCount(null); }
       };
@@ -163,8 +159,8 @@ const Dashboard = () => {
   const handleDeleteContact = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this contact?")) return;
     try {
-      const res = await fetch(`/api/contacts/${id}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await apiCall(`/contacts/${id}`, { method: "DELETE" });
+      if (res && res.success) {
         setContacts(contacts.filter((c) => c._id !== id));
       } else {
         alert("Failed to delete contact");
