@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { apiCall } from "../lib/api";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -12,19 +13,13 @@ const ForgotPassword = () => {
     setMessage("");
     setError("");
     try {
-      const res = await fetch("/api/forgot-password", {
+      const data = await apiCall("/forgot-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      const data = await res.json();
-      if (res.ok) {
-        setMessage("If this email exists, a reset link has been sent.");
-      } else {
-        setError(data.message || "Something went wrong");
-      }
-    } catch (err) {
-      setError("Network error");
+      setMessage("If this email exists, a reset link has been sent.");
+    } catch (err: any) {
+      setError(err?.message || "Network error");
     }
     setLoading(false);
   };
