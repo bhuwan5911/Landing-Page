@@ -133,7 +133,7 @@ router.post("/api/forgot-password", async (req, res) => {
           pass: process.env.EMAIL_PASS,
         },
       });
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+      const frontendUrl = 'https://creatorxjatin.vercel.app'; // Always use deployed frontend URL
       const resetLink = `${frontendUrl}/reset-password?token=${token}&email=${email}`;
       const mailOptions = {
         from: process.env.EMAIL_USER,
