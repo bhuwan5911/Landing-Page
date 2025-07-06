@@ -1,5 +1,4 @@
 import express from "express";
-import type { Request, Response, RequestHandler } from "express";
 import { z, ZodError } from "zod";
 import Contact from "./models/contactModel";
 import User from "./models/userModel";
@@ -16,10 +15,9 @@ const messageValidationSchema = z.object({
 
 const router = express.Router();
 
-router.post("/api/contact", (async (req, res) => {
+router.post("/api/contact", async (req, res) => {
   try {
     const messageData = messageValidationSchema.parse(req.body);
-    // Save to MongoDB
     const contact = new Contact({
       name: messageData.name,
       email: messageData.email,
@@ -28,8 +26,6 @@ router.post("/api/contact", (async (req, res) => {
       createdAt: new Date(),
     });
     await contact.save();
-
-    // Send email notification to admin
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -41,7 +37,7 @@ router.post("/api/contact", (async (req, res) => {
     });
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // send to yourself (admin)
+      to: process.env.EMAIL_USER,
       subject: `New Contact Form Submission from ${contact.name}`,
       html: `
           <div style="font-family: Arial, sans-serif; padding: 16px;">
@@ -61,7 +57,6 @@ router.post("/api/contact", (async (req, res) => {
     } catch (err) {
       console.error("Failed to send contact notification email:", err);
     }
-
     res.status(201).json({ success: true, message: "Message received and saved" });
   } catch (error) {
     console.error('Error saving contact:', error);
@@ -73,9 +68,9 @@ router.post("/api/contact", (async (req, res) => {
     const errorStack = error instanceof Error ? error.stack : undefined;
     res.status(500).json({ message: "Server error", error: errorMessage, stack: errorStack });
   }
-}) as RequestHandler);
+});
 
-router.get("/api/contacts", (async (_req, res) => {
+router.get("/api/contacts", async (req, res) => {
   try {
     const contacts = await Contact.find({});
     res.status(200).json(contacts);
@@ -84,9 +79,9 @@ router.get("/api/contacts", (async (_req, res) => {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     res.status(500).json({ message: "Server error", error: errorMessage });
   }
-}) as RequestHandler);
+});
 
-router.get("/api/contacts/stats", (async (_req, res) => {
+router.get("/api/contacts/stats", async (req, res) => {
   try {
     const now = new Date();
     // Start of today
@@ -108,11 +103,14 @@ router.get("/api/contacts/stats", (async (_req, res) => {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     res.status(500).json({ message: "Failed to fetch stats", error: errorMessage });
   }
-}) as RequestHandler);
+});
 
-router.post("/api/forgot-password", (async (req, res) => {
+router.post("/api/forgot-password", async (req, res) => {
   const { email } = req.body;
-  if (!email) return res.status(400).json({ message: "Email is required" });
+  if (!email) {
+    res.status(400).json({ message: "Email is required" });
+    return;
+  }
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -168,16 +166,25 @@ router.post("/api/forgot-password", (async (req, res) => {
     console.error("Forgot password error:", error);
     res.status(500).json({ message: "Server error" });
   }
-}) as RequestHandler);
+});
 
-router.post("/api/login", async (req: Request, res: Response) => {
+router.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ message: "Email and password required" });
+  if (!email || !password) {
+    res.status(400).json({ message: "Email and password required" });
+    return;
+  }
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: "Invalid credentials" });
+    if (!user) {
+      res.status(401).json({ message: "Invalid credentials" });
+      return;
+    }
     const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(401).json({ message: "Invalid credentials" });
+    if (!match) {
+      res.status(401).json({ message: "Invalid credentials" });
+      return;
+    }
     // For demo, just return success
     res.json({ success: true, email: user.email });
   } catch (error) {
@@ -185,7 +192,7 @@ router.post("/api/login", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/api/test-email", async (req: Request, res: Response) => {
+router.post("/api/test-email", async (req, res) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -218,7 +225,7 @@ router.post("/api/test-email", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/api/contacts/:id", async (req: Request, res: Response) => {
+router.delete("/api/contacts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await Contact.findByIdAndDelete(id);
@@ -228,15 +235,17 @@ router.delete("/api/contacts/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/api/reset-password", async (req: Request, res: Response) => {
+router.post("/api/reset-password", async (req, res) => {
   const { token, email, password } = req.body;
   if (!token || !email || !password) {
-    return res.status(400).json({ message: "Missing required fields." });
+    res.status(400).json({ message: "Missing required fields." });
+    return;
   }
   try {
     const user = await User.findOne({ email, resetToken: token, resetTokenExpiry: { $gt: new Date() } });
     if (!user) {
-      return res.status(400).json({ message: "Invalid or expired reset link." });
+      res.status(400).json({ message: "Invalid or expired reset link." });
+      return;
     }
     const hashed = await bcrypt.hash(password, 10);
     user.password = hashed;
@@ -250,7 +259,7 @@ router.post("/api/reset-password", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/api/contacts/trends", async (req: Request, res: Response) => {
+router.get("/api/contacts/trends", async (req, res) => {
   try {
     const now = new Date();
     const range = req.query.range || 'week';
@@ -258,11 +267,11 @@ router.get("/api/contacts/trends", async (req: Request, res: Response) => {
     let start;
     let groupFormat = "%Y-%m-%d";
     // Helper to get local midnight
-    function getLocalMidnight(date: Date): Date {
+    function getLocalMidnight(date) {
       return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
     // Helper to format date as YYYY-MM-DD in local time
-    function formatLocalDate(date: Date): string {
+    function formatLocalDate(date) {
       const y = date.getFullYear();
       const m = (date.getMonth() + 1).toString().padStart(2, '0');
       const d = date.getDate().toString().padStart(2, '0');
@@ -283,7 +292,7 @@ router.get("/api/contacts/trends", async (req: Request, res: Response) => {
       start = getLocalMidnight(new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1)));
     }
 
-    let pipeline: any[];
+    let pipeline;
     if (range === 'year') {
       pipeline = [
         { $match: { createdAt: { $gte: start } } },
@@ -312,7 +321,7 @@ router.get("/api/contacts/trends", async (req: Request, res: Response) => {
       for (let i = 0; i < 12; i++) {
         const month = (i + 1).toString().padStart(2, '0');
         const dateStr = `${now.getFullYear()}-${month}`;
-        const found = results.find((r: any) => r._id === dateStr);
+        const found = results.find((r) => r._id === dateStr);
         trend.push({ date: dateStr, count: found ? found.count : 0 });
       }
     } else {
@@ -320,7 +329,7 @@ router.get("/api/contacts/trends", async (req: Request, res: Response) => {
         const d = new Date(start);
         d.setDate(start.getDate() + i);
         const dateStr = groupFormat === "%Y-%m-%d" ? formatLocalDate(d) : `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2, '0')}`;
-        const found = results.find((r: any) => r._id === dateStr);
+        const found = results.find((r) => r._id === dateStr);
         trend.push({ date: dateStr, count: found ? found.count : 0 });
       }
     }
@@ -331,7 +340,7 @@ router.get("/api/contacts/trends", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/api/contacts/recent", async (_req: Request, res: Response) => {
+router.get("/api/contacts/recent", async (req, res) => {
   try {
     const recent = await Contact.find({}, "name createdAt").sort({ createdAt: -1 }).limit(5);
     res.json(recent);
@@ -341,12 +350,15 @@ router.get("/api/contacts/recent", async (_req: Request, res: Response) => {
   }
 });
 
-router.get("/api/contacts/stats-range", async (req: Request, res: Response) => {
+router.get("/api/contacts/stats-range", async (req, res) => {
   try {
     const { from, to } = req.query;
-    if (!from || !to) return res.status(400).json({ message: "Missing from or to date" });
-    const fromDate = new Date(from as string);
-    const toDate = new Date(to as string);
+    if (!from || !to) {
+      res.status(400).json({ message: "Missing from or to date" });
+      return;
+    }
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
     toDate.setHours(23, 59, 59, 999);
     const count = await Contact.countDocuments({ createdAt: { $gte: fromDate, $lte: toDate } });
     res.json({ count });
