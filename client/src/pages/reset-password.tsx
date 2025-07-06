@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { apiCall } from "../lib/api";
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
@@ -28,20 +29,14 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch("/api/reset-password", {
+      await apiCall("/reset-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, email, password }),
       });
-      const data = await res.json();
-      if (res.ok) {
-        setSuccess("Password reset successful! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 2000);
-      } else {
-        setError(data.message || "Failed to reset password.");
-      }
-    } catch {
-      setError("Failed to reset password.");
+      setSuccess("Password reset successful! Redirecting to login...");
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err: any) {
+      setError(err?.message || "Failed to reset password.");
     }
     setLoading(false);
   };
