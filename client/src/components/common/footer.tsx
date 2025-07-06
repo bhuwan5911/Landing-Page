@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
@@ -46,10 +46,10 @@ export default function Footer() {
           </p>
 
           <div className="flex space-x-6">
-            <Link href="/" className="text-gray-500 hover:text-gray-300 text-sm">
+            <Link to="/" className="text-gray-500 hover:text-gray-300 text-sm">
               Home
             </Link>
-            <Link href="/contact" className="text-gray-500 hover:text-gray-300 text-sm">
+            <Link to="/contact" className="text-gray-500 hover:text-gray-300 text-sm">
               Contact
             </Link>
           </div>
