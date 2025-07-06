@@ -10,7 +10,7 @@ import { Calendar } from "../components/ui/calendar";
 import { Skeleton } from "../components/ui/skeleton";
 import { format, formatDistanceToNow } from "date-fns";
 import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt, FaChartLine, FaUserClock } from "react-icons/fa";
-const logoImg = "/assets/WhatsApp Image 2025-05-21 at 22.11.33_f363f5ff.jpg";
+const logoImg = "/4.jpg";
 import * as RechartsPrimitive from "recharts";
 import { DateRange } from "react-day-picker";
 

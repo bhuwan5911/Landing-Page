@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 import { useEffect } from "react";
-import mainImage from "../assets/WhatsApp Image 2025-05-21 at 22.11.33_715892f8.jpg";
+// Use public path for mainImage
 
 export default function Home() {
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Home() {
             >
               <div className="relative rounded-xl shadow-2xl overflow-hidden">
                 <img 
-                  src={mainImage} 
+                  src="/1.jpg" 
                   alt="Jatin - Personal Trainer" 
                   className="w-full h-full object-cover"
                 />
@@ -111,7 +111,7 @@ export default function Home() {
             >
               <div className="relative h-[400px] mb-6 overflow-hidden rounded-lg">
                 <img 
-                  src="/src/assets/WhatsApp Image 2025-05-21 at 22.11.32_b318d0c9.jpg"
+                  src="/2.jpg"
                   alt="Jatin with motorcycle" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
@@ -128,7 +128,7 @@ export default function Home() {
             >
               <div className="relative h-[400px] mb-6 overflow-hidden rounded-lg">
                 <img 
-                  src="/src/assets/4.jpg"
+                  src="/3.jpg"
                   alt="Jatin at the gym" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
