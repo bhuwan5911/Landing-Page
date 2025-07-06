@@ -31,6 +31,9 @@ app.use(express.urlencoded({ extended: true }));
     const __dirname = path.resolve();
     const clientBuildPath = path.join(__dirname, "../client/dist");
     app.use(express.static(clientBuildPath));
+    app.get("/", (_req, res) => {
+      res.send("✅ Backend is working!");
+    });
     app.get("*", (req, res) => {
       res.sendFile(path.join(clientBuildPath, "index.html"));
     });
@@ -42,9 +45,6 @@ app.use(express.urlencoded({ extended: true }));
       console.log(`🌱 Environment: ${process.env.NODE_ENV}`);
       console.log("===================================");
     });
-    app.get("/", (_req, res) => {
-  res.send("✅ Backend is working!");
-});
 
   } catch (error) {
     console.error("❌ Server failed to start:", error);
