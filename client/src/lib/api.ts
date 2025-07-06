@@ -1,7 +1,5 @@
-// API configuration for different environments
-const API_BASE_URL = (import.meta as any).env?.PROD 
-  ? 'https://creatorxjatin.onrender.com/api' // Use your actual backend URL
-  : 'http://localhost:5000/api';
+// API configuration for all environments (force backend URL)
+const API_BASE_URL = 'https://creatorxjatin.onrender.com/api';
 
 export const apiConfig = {
   baseURL: API_BASE_URL,
