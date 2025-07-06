@@ -14,7 +14,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ======= Middlewares =======
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-vercel-frontend-url.vercel.app" // <-- replace with your actual Vercel frontend URL
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
