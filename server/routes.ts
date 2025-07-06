@@ -267,11 +267,11 @@ router.get("/api/contacts/trends", async (req, res) => {
     let start;
     let groupFormat = "%Y-%m-%d";
     // Helper to get local midnight
-    function getLocalMidnight(date) {
+    function getLocalMidnight(date: Date): Date {
       return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
     // Helper to format date as YYYY-MM-DD in local time
-    function formatLocalDate(date) {
+    function formatLocalDate(date: Date): string {
       const y = date.getFullYear();
       const m = (date.getMonth() + 1).toString().padStart(2, '0');
       const d = date.getDate().toString().padStart(2, '0');
@@ -301,7 +301,7 @@ router.get("/api/contacts/trends", async (req, res) => {
             count: { $sum: 1 }
           }
         },
-        { $sort: { _id: 1 } }
+        { $sort: { _id: 1 as 1 } }
       ];
     } else {
       pipeline = [
@@ -311,7 +311,7 @@ router.get("/api/contacts/trends", async (req, res) => {
             count: { $sum: 1 }
           }
         },
-        { $sort: { _id: 1 } }
+        { $sort: { _id: 1 as 1 } }
       ];
     }
     const results = await Contact.aggregate(pipeline);
@@ -357,8 +357,10 @@ router.get("/api/contacts/stats-range", async (req, res) => {
       res.status(400).json({ message: "Missing from or to date" });
       return;
     }
-    const fromDate = new Date(from);
-    const toDate = new Date(to);
+    const fromStr = Array.isArray(from) ? from[0] : from;
+    const toStr = Array.isArray(to) ? to[0] : to;
+    const fromDate = new Date(fromStr as string);
+    const toDate = new Date(toStr as string);
     toDate.setHours(23, 59, 59, 999);
     const count = await Contact.countDocuments({ createdAt: { $gte: fromDate, $lte: toDate } });
     res.json({ count });
