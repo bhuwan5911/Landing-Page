@@ -3,7 +3,7 @@
 A full-stack contact management and analytics dashboard with modern UI/UX, built with React (Vite), Express, MongoDB, Tailwind CSS, Framer Motion, jsPDF, Nodemailer, and bcryptjs.
 
 ## 🚀 Project Overview
-ProductPulse is an admin-only dashboard for managing contact form submissions, visualizing analytics, exporting data, and receiving email notifications. It features a secure authentication system, animated UI, dark/light mode, and mobile-friendly design.
+Landing-Page is an admin-only dashboard for managing contact form submissions, visualizing analytics, exporting data, and receiving email notifications. It features a secure authentication system, animated UI, dark/light mode, and mobile-friendly design.
 
 ## ✨ Features
 - **Admin Dashboard**: Secure login/logout, password reset, and admin-only access
