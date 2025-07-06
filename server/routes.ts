@@ -14,7 +14,7 @@ const messageValidationSchema = z.object({
   message: z.string().min(10),
 });
 
-export function registerRoutes(app: Express): Server {
+export function registerRoutes(): Router {
   const router = Router();
 
   router.post("/api/contact", async (req, res) => {
@@ -356,9 +356,5 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Use the router
-  app.use(router);
-
-  const httpServer = createServer(app);
-  return httpServer;
+  return router;
 }
