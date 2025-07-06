@@ -67,7 +67,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof ZodError) {
         return res.status(400).json({ message: "Invalid form data", errors: error.errors });
       }
-      res.status(500).json({ message: "Server error", error: error?.message, stack: error?.stack });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      const errorStack = error instanceof Error ? error.stack : undefined;
+      res.status(500).json({ message: "Server error", error: errorMessage, stack: errorStack });
     }
   });
 
@@ -77,7 +79,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(200).json(contacts);
     } catch (error) {
       console.error('Error fetching contacts:', error);
-      res.status(500).json({ message: "Server error", error: error?.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Server error", error: errorMessage });
     }
   });
 
@@ -100,7 +103,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       ]);
       res.json({ today: todayCount, week: weekCount, year: yearCount });
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch stats", error: error?.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Failed to fetch stats", error: errorMessage });
     }
   });
 
@@ -202,11 +206,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.json({ message: "Test email sent (if credentials are correct)." });
       } catch (err) {
         console.error("Nodemailer test email error:", err);
-        res.status(500).json({ message: "Failed to send test email.", error: err.message });
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        res.status(500).json({ message: "Failed to send test email.", error: errorMessage });
       }
     } catch (error) {
       console.error("Test email error:", error);
-      res.status(500).json({ message: "Failed to send test email.", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Failed to send test email.", error: errorMessage });
     }
   });
 
@@ -250,11 +256,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let start;
       let groupFormat = "%Y-%m-%d";
       // Helper to get local midnight
-      function getLocalMidnight(date) {
+      function getLocalMidnight(date: Date): Date {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
       }
       // Helper to format date as YYYY-MM-DD in local time
-      function formatLocalDate(date) {
+      function formatLocalDate(date: Date): string {
         const y = date.getFullYear();
         const m = (date.getMonth() + 1).toString().padStart(2, '0');
         const d = date.getDate().toString().padStart(2, '0');
@@ -304,7 +310,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         for (let i = 0; i < 12; i++) {
           const month = (i + 1).toString().padStart(2, '0');
           const dateStr = `${now.getFullYear()}-${month}`;
-          const found = results.find(r => r._id === dateStr);
+          const found = results.find((r: any) => r._id === dateStr);
           trend.push({ date: dateStr, count: found ? found.count : 0 });
         }
       } else {
@@ -312,13 +318,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const d = new Date(start);
           d.setDate(start.getDate() + i);
           const dateStr = groupFormat === "%Y-%m-%d" ? formatLocalDate(d) : `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2, '0')}`;
-          const found = results.find(r => r._id === dateStr);
+          const found = results.find((r: any) => r._id === dateStr);
           trend.push({ date: dateStr, count: found ? found.count : 0 });
         }
       }
       res.json(trend);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch trends", error: error?.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Failed to fetch trends", error: errorMessage });
     }
   });
 
@@ -327,7 +334,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const recent = await Contact.find({}, { name: 1, createdAt: 1 }).sort({ createdAt: -1 }).limit(5);
       res.json(recent);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch recent contacts", error: error?.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Failed to fetch recent contacts", error: errorMessage });
     }
   });
 
@@ -341,7 +349,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const count = await Contact.countDocuments({ createdAt: { $gte: fromDate, $lte: toDate } });
       res.json({ count });
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch range stats", error: error?.message });
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      res.status(500).json({ message: "Failed to fetch range stats", error: errorMessage });
     }
   });
 

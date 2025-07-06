@@ -28,8 +28,7 @@ app.use(express.urlencoded({ extended: true }));
     await registerRoutes(app);
 
     // Serve static files from React build (always, not just in production)
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    const __dirname = path.resolve();
     const clientBuildPath = path.join(__dirname, "../client/dist");
     app.use(express.static(clientBuildPath));
     app.get("*", (req, res) => {
