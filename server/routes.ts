@@ -70,6 +70,10 @@ router.post("/api/contact", async (req, res) => {
   }
 });
 
+router.get("/api/contact", (req, res) => {
+  res.json({ message: "GET /api/contact is working, but use POST to submit data." });
+});
+
 router.get("/api/contacts", async (req, res) => {
   try {
     const contacts = await Contact.find({});
