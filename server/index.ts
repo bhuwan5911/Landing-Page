@@ -34,9 +34,9 @@ app.use(express.urlencoded({ extended: true }));
     app.get("/", (_req, res) => {
       res.send("✅ Backend is working!");
     });
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(clientBuildPath, "index.html"));
-    });
+    // app.get("*", (req, res) => {
+    //   res.sendFile(path.join(clientBuildPath, "index.html"));
+    // });
 
     // Start server
     server.listen(Number(PORT), '0.0.0.0', () => {
