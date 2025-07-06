@@ -66,7 +66,8 @@ router.post("/api/contact", async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error saving contact:', error);
     if (error instanceof ZodError) {
-      return res.status(400).json({ message: "Invalid form data", errors: error.errors });
+      res.status(400).json({ message: "Invalid form data", errors: error.errors });
+      return;
     }
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     const errorStack = error instanceof Error ? error.stack : undefined;
