@@ -121,7 +121,7 @@ router.post("/api/forgot-password", async (req, res) => {
       // Generate reset token
       const token = crypto.randomBytes(32).toString("hex");
       user.resetToken = token;
-      user.resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60); // 1 hour
+      user.resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes
       await user.save();
       // Send the email with nodemailer
       const transporter = nodemailer.createTransport({
@@ -147,7 +147,7 @@ router.post("/api/forgot-password", async (req, res) => {
               <p>
                 <a href="${resetLink}" style="display:inline-block;padding:10px 20px;background:#22c55e;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Click here to reset your password</a>
               </p>
-              <p>This link is valid for 1 hour. ⏰</p>
+              <p>This link is valid for 10 minutes. ⏰</p>
               <hr style="margin:24px 0;" />
               <p style="font-size:1.1em;">💡 <b>Motivation:</b> "The best way to get things done is to simply begin. Remember your password and keep moving forward! 🚀"</p>
               <p style="color:#888;font-size:0.95em;">If you did not request this, you can safely ignore this email.</p>
