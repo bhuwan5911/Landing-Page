@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
     const server = createServer(app);
 
     // Register all routes
-    await registerRoutes(app);
+    registerRoutes(app);
 
     // Serve static files from React build (always, not just in production)
     const __dirname = path.resolve();

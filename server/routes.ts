@@ -14,7 +14,7 @@ const messageValidationSchema = z.object({
   message: z.string().min(10),
 });
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export function registerRoutes(app: Express): Server {
   app.post("/api/contact", async (req, res) => {
     try {
       const messageData = messageValidationSchema.parse(req.body);
@@ -281,7 +281,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         start = getLocalMidnight(new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1)));
       }
 
-      let pipeline;
+      let pipeline: any[];
       if (range === 'year') {
         pipeline = [
           { $match: { createdAt: { $gte: start } } },
@@ -331,7 +331,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/contacts/recent", async (_req, res) => {
     try {
-      const recent = await Contact.find({}, { name: 1, createdAt: 1 }).sort({ createdAt: -1 }).limit(5);
+      const recent = await Contact.find({}, "name createdAt").sort({ createdAt: -1 }).limit(5);
       res.json(recent);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
