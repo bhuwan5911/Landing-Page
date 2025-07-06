@@ -33,8 +33,7 @@ const ResetPassword = () => {
         method: "POST",
         body: JSON.stringify({ token, email, password }),
       });
-      setSuccess("Password reset successful! Redirecting to login...");
-      setTimeout(() => navigate("/login"), 2000);
+      navigate("/login");
     } catch (err: any) {
       setError(err?.message || "Failed to reset password.");
     }
