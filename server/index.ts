@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 // ======= Middlewares =======
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://your-vercel-frontend-url.vercel.app" // <-- replace with your actual Vercel frontend URL
+  "https://creatorxjatin.vercel.app" // <-- your actual Vercel frontend URL
 ];
 
 app.use(cors({
