@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     setMessage("");
     setError("");
     try {
-      const data = await apiCall("/forgot-password", {
+      await apiCall("/forgot-password", {
         method: "POST",
         body: JSON.stringify({ email }),
       });
