@@ -1,3 +1,5 @@
+// about.tsx
+// About page for the site. Displays information about the creator and includes the Bio component.
 import { motion } from "framer-motion";
 import { pageTransition } from "@/lib/animations";
 import Bio from "@/components/about/bio";
@@ -10,6 +12,7 @@ export default function About() {
   }, []);
 
   return (
+    // Main animated container for the about page
     <motion.div
       initial="hidden"
       animate="show"
@@ -17,6 +20,7 @@ export default function About() {
       variants={pageTransition}
       className="overflow-hidden"
     >
+      {/* Header section */}
       <div className="bg-gradient-to-r from-primary to-gray-800 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-montserrat font-bold mb-4">
@@ -27,6 +31,7 @@ export default function About() {
         </div>
       </div>
       
+      {/* Bio section */}
       <Bio />
     
     </motion.div>

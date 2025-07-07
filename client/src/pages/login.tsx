@@ -1,3 +1,5 @@
+// login.tsx
+// Login page for admin users. Handles authentication, form state, and error feedback.
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
@@ -12,6 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Handle form submission and authentication
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -25,19 +28,23 @@ const Login = () => {
     }
   };
 
+  // Handle email input change
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
+  // Handle password input change
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
+  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((s: boolean) => !s);
   };
 
   return (
+    // Main login form layout with animated elements
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-black transition-colors duration-500">
       <motion.div
         initial={{ scale: 0.9 }}

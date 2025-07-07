@@ -1,20 +1,25 @@
+// use-auth.tsx
+// Provides authentication context and hooks for login/logout functionality across the app.
 import { createContext, useContext, useState, ReactNode } from "react";
 import { apiCall } from "../lib/api";
 
+// Define the shape of the authentication context
 interface AuthContextType {
   user: string | null;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
 
+// Create the AuthContext
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// AuthProvider wraps the app and provides authentication state and actions
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>(() => {
     return localStorage.getItem("auth_user") || null;
   });
 
-  // Dummy login logic (replace with real API call)
+  // Login function (replace with real API call in production)
   const login = async (email: string, password: string) => {
     try {
       const res = await apiCall("/login", {
@@ -32,6 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Logout function clears user state and localStorage
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_user");
@@ -44,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Custom hook to access authentication context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error("useAuth must be used within an AuthProvider");

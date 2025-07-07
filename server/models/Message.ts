@@ -1,5 +1,8 @@
+// Message.ts
+// Defines the Message schema and model for MongoDB using Mongoose. Used for storing user messages.
 import mongoose from "mongoose";
 
+// Message schema definition
 const messageSchema = new mongoose.Schema({
   fullName: String,
   email: String,
@@ -11,4 +14,5 @@ const messageSchema = new mongoose.Schema({
   },
 });
 
+// Message model
 export const Message = mongoose.model("Message", messageSchema);

@@ -1,3 +1,5 @@
+// images.d.ts
+// TypeScript module declarations for importing image files as modules.
 declare module "*.jpg" {
   const src: string;
   export default src;

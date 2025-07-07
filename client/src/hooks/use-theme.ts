@@ -1,3 +1,5 @@
+// use-theme.ts
+// Custom hook to access the theme context for light/dark mode management.
 import { useContext } from "react";
 import { ThemeProviderContext } from "@/components/ui/theme-provider";
 

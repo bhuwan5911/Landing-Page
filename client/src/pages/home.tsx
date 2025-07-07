@@ -1,3 +1,5 @@
+// home.tsx
+// Home page for the site. Features hero, about, and content creator sections with animations and social links.
 import { motion } from "framer-motion";
 import { pageTransition, fadeIn, staggerContainer } from "@/lib/animations";
 import { Link } from "react-router-dom";
@@ -13,6 +15,7 @@ export default function Home() {
   }, []);
 
   return (
+    // Main animated container for the home page
     <motion.div
       initial="hidden"
       animate="show"

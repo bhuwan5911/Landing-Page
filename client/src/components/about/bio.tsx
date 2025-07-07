@@ -1,3 +1,5 @@
+// bio.tsx
+// Bio component for the About page. Displays personal info, certifications, and social links with animations.
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import { FaInstagram, FaYoutube, FaDownload } from "react-icons/fa";
 
 export default function Bio() {
   return (
+    // Main section with image, social links, and bio details
     <section className="py-20 bg-gray-100">
       <motion.div
         variants={staggerContainer}
@@ -13,6 +16,7 @@ export default function Bio() {
         className="container mx-auto px-4"
       >
         <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Left: Profile image and social links */}
           <motion.div
             variants={fadeIn('right', 'tween', 0.2, 1)}
             className="w-full lg:w-1/2"
@@ -24,6 +28,7 @@ export default function Bio() {
               style={{ maxHeight: "600px" }}
             />
             <div className="flex justify-center mt-6 space-x-4">
+              {/* Social media links */}
               <a 
                 href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" 
                 target="_blank" 
@@ -51,6 +56,7 @@ export default function Bio() {
             </div>
           </motion.div>
           
+          {/* Right: Bio details and certifications */}
           <motion.div
             variants={fadeIn('left', 'tween', 0.4, 1)}
             className="w-full lg:w-1/2"

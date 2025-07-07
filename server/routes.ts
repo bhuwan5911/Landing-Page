@@ -1,3 +1,6 @@
+// routes.ts
+// Main backend API routes for contact form, user authentication, password reset, and email notifications.
+// Includes validation, database operations, and error handling.
 import express from "express";
 import { z, ZodError } from "zod";
 import Contact from "./models/contactModel";
@@ -6,6 +9,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
 
+// Contact form validation schema
 const messageValidationSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
@@ -15,6 +19,7 @@ const messageValidationSchema = z.object({
 
 const router = express.Router();
 
+// POST /api/contact - Save contact and send notification email
 router.post("/api/contact", async (req, res) => {
   try {
     const messageData = messageValidationSchema.parse(req.body);
@@ -26,6 +31,7 @@ router.post("/api/contact", async (req, res) => {
       createdAt: new Date(),
     });
     await contact.save();
+    // Send notification email using nodemailer
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,

@@ -1,6 +1,9 @@
+// userModel.ts
+// Defines the User schema and model for MongoDB using Mongoose. Includes logic to create a default admin user.
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
+// User document interface
 export interface IUser extends Document {
   email: string;
   password: string;
@@ -8,6 +11,7 @@ export interface IUser extends Document {
   resetTokenExpiry?: Date;
 }
 
+// User schema definition
 const userSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
@@ -15,6 +19,7 @@ const userSchema = new Schema<IUser>({
   resetTokenExpiry: { type: Date },
 });
 
+// User model
 const User = mongoose.model<IUser>("User", userSchema);
 
 // Create default admin user if not exists
@@ -29,6 +34,7 @@ async function createDefaultAdmin() {
   }
 }
 
+// Run admin creation on startup
 createDefaultAdmin().catch(console.error);
 
 export default User; 

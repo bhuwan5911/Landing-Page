@@ -1,7 +1,10 @@
+// queryClient.ts
+// Sets up React Query client for data fetching and caching. Includes API request helper and error handling.
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
 const BASE_URL = "https://creatorxjatin.onrender.com";
 
+// Helper to throw error if response is not OK
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -9,6 +12,7 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+// API request helper for making HTTP requests
 export async function apiRequest(
   method: string,
   url: string,
@@ -28,6 +32,7 @@ export async function apiRequest(
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
+// Query function for React Query with 401 handling
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
 }) => QueryFunction<T> =
@@ -45,6 +50,7 @@ export const getQueryFn: <T>(options: {
     return await res.json();
   };
 
+// Create and configure the React Query client
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

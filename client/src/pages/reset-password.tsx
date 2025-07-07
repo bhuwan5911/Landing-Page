@@ -1,3 +1,5 @@
+// reset-password.tsx
+// ResetPassword page for users to set a new password. Handles token validation, form state, and error feedback.
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { apiCall } from "../lib/api";
@@ -12,9 +14,11 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // Get token and email from URL parameters
   const token = searchParams.get("token");
   const email = searchParams.get("email");
 
+  // Handle form submission and password reset
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -40,19 +44,23 @@ const ResetPassword = () => {
     setLoading(false);
   };
 
+  // Handle password input change
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
+  // Handle confirm password input change
   const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value);
   };
 
+  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((s: boolean) => !s);
   };
 
   return (
+    // Main reset password form layout
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-300 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <form
         onSubmit={handleSubmit}

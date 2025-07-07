@@ -1,20 +1,24 @@
+// dashboard.tsx
+// Dashboard page for authenticated users. Displays contact stats, trends, recent contacts, and allows PDF export.
+// Uses custom hooks, API calls, and charting libraries for data visualization.
 import React from "react";
-import { useAuth } from "../hooks/use-auth";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
-import { useTheme } from "../components/ui/theme-provider";
-import { ChartContainer } from "../components/ui/chart";
-import { Calendar } from "../components/ui/calendar";
-import { Skeleton } from "../components/ui/skeleton";
-import { format, formatDistanceToNow } from "date-fns";
-import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt, FaChartLine, FaUserClock } from "react-icons/fa";
+import { useAuth } from "../hooks/use-auth"; // Custom hook for authentication context
+import { useNavigate } from "react-router-dom"; // Navigation between routes
+import { motion } from "framer-motion"; // Animation library
+import jsPDF from "jspdf"; // PDF generation
+import autoTable from "jspdf-autotable"; // Table support for jsPDF
+import { useTheme } from "../components/ui/theme-provider"; // Theme context
+import { ChartContainer } from "../components/ui/chart"; // Chart component
+import { Calendar } from "../components/ui/calendar"; // Calendar UI
+import { Skeleton } from "../components/ui/skeleton"; // Loading skeleton
+import { format, formatDistanceToNow } from "date-fns"; // Date formatting
+import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt, FaChartLine, FaUserClock } from "react-icons/fa"; // Icons
 const logoImg = "/4.jpg";
-import * as RechartsPrimitive from "recharts";
-import { DateRange } from "react-day-picker";
-import { apiCall } from "../lib/api";
+import * as RechartsPrimitive from "recharts"; // Charting primitives
+import { DateRange } from "react-day-picker"; // Date range picker
+import { apiCall } from "../lib/api"; // API utility for HTTP requests
 
+// Type definitions for contacts and stats
 interface Contact {
   _id: string;
   name: string;
@@ -33,7 +37,7 @@ interface ContactStats {
 interface TrendPoint { date: string; count: number; }
 interface RecentContact { _id: string; name: string; createdAt: string; }
 
-// Count-up animation for stats
+// Custom hook for animated count-up effect in stats
 function useCountUp(target: number, duration = 1) {
   const [value, setValue] = React.useState(0);
   React.useEffect(() => {
@@ -54,6 +58,7 @@ function useCountUp(target: number, duration = 1) {
 }
 
 const Dashboard = () => {
+  // Main dashboard logic: authentication, navigation, state for contacts, stats, trends, and UI controls
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [contacts, setContacts] = React.useState<Contact[]>([]);
@@ -68,14 +73,15 @@ const Dashboard = () => {
   const [rangeCount, setRangeCount] = React.useState<number | null>(null);
   const [trendRange, setTrendRange] = React.useState<'day' | 'week' | 'month' | 'year'>('week');
 
+  // Redirect to login if not authenticated
   React.useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user, navigate]);
 
+  // Fetch contacts, stats, and recent contacts on mount
   React.useEffect(() => {
-    // Only fetch contacts, stats, and recent ONCE on mount
     const fetchContacts = async () => {
       setLoading(true);
       setError("");
@@ -106,8 +112,8 @@ const Dashboard = () => {
     fetchRecent();
   }, []);
 
+  // Fetch trends when trendRange changes
   React.useEffect(() => {
-    // Only fetch trends when trendRange changes
     const fetchTrends = async () => {
       try {
         const data = await apiCall(`/contacts/trends?range=${trendRange}`);
@@ -117,6 +123,7 @@ const Dashboard = () => {
     fetchTrends();
   }, [trendRange]);
 
+  // Fetch stats for selected date range
   React.useEffect(() => {
     if (range && range.from && range.to) {
       const fetchRange = async () => {
@@ -132,11 +139,12 @@ const Dashboard = () => {
     }
   }, [range]);
 
-  // Only call hooks at the top level, not in map/render
+  // Animated stats for today, week, year
   const todayCount = useCountUp(stats ? stats.today : 0);
   const weekCount = useCountUp(stats ? stats.week : 0);
   const yearCount = useCountUp(stats ? stats.year : 0);
 
+  // Export contacts as PDF
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     doc.text("Contacts Data", 14, 16);
@@ -156,6 +164,7 @@ const Dashboard = () => {
     doc.save("contacts.pdf");
   };
 
+  // Delete a contact
   const handleDeleteContact = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this contact?")) return;
     try {
@@ -170,6 +179,7 @@ const Dashboard = () => {
     }
   };
 
+  // Main dashboard UI layout
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center transition-colors duration-700 bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-800 p-4"

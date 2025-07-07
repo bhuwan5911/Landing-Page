@@ -1,8 +1,11 @@
+// footer.tsx
+// Footer component with contact info, social links, and navigation links.
 import { Link } from "react-router-dom";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
+    // Main footer layout
     <footer className="bg-primary text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -14,6 +17,7 @@ export default function Footer() {
             <p className="text-gray-400 mb-6">
               Content creator and fitness enthusiast helping people achieve their fitness goals through professional guidance and motivation.
             </p>
+            {/* Social media links */}
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/officialjxtin?igsh=MWczN2w4cmpxZ3Qybg==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-all">
                 <FaInstagram className="text-xl" />
@@ -45,6 +49,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} CreatorXJatin. All rights reserved.
           </p>
 
+          {/* Navigation links */}
           <div className="flex space-x-6">
             <Link to="/" className="text-gray-500 hover:text-gray-300 text-sm">
               Home

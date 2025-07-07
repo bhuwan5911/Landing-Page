@@ -1,3 +1,5 @@
+// createAdminUser.ts
+// Script to create a default admin user in the database. Connects to MongoDB and inserts admin credentials if not present.
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 // import dotenv from 'dotenv';
@@ -10,6 +12,7 @@ console.log('MONGODB_URI:', MONGODB_URI);
 const ADMIN_EMAIL = 'jatinin567@gmail.com'; 
 const ADMIN_PASSWORD = 'MONEY777'; 
 
+// User schema definition
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
@@ -17,6 +20,7 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
+// Create admin user if not exists
 async function createAdmin() {
   await mongoose.connect(MONGODB_URI);
   const existing = await User.findOne({ email: ADMIN_EMAIL });

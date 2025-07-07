@@ -1,6 +1,8 @@
-// models/contactModel.ts
+// contactModel.ts
+// Defines the Contact schema and model for MongoDB using Mongoose. Includes validation for contact form fields.
 import mongoose, { Document, Schema } from "mongoose";
 
+// Contact document interface
 export interface IContact extends Document {
   name: string;
   email: string;
@@ -9,6 +11,7 @@ export interface IContact extends Document {
   createdAt: Date;
 }
 
+// Contact schema definition with validation
 const contactSchema = new Schema<IContact>({
   name: {
     type: String,
@@ -41,6 +44,7 @@ const contactSchema = new Schema<IContact>({
   }
 });
 
+// Contact model
 const Contact = mongoose.model<IContact>("Contact", contactSchema);
 
 export default Contact;

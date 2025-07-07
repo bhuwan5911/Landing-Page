@@ -1,8 +1,11 @@
+// not-found.tsx
+// NotFound page for undefined routes. Displays a 404 error message.
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 
 export default function NotFound() {
   return (
+    // Centered card with 404 message
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md mx-4">
         <CardContent className="pt-6">
