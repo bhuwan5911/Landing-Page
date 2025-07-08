@@ -43,25 +43,10 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     const server = createServer(app);
 
     // Register all API routes
-    // Defensive: Log all registered routes to catch malformed paths
-    if (router && router.stack) {
-      router.stack.forEach((layer, idx) => {
-        if (layer.route && layer.route.path) {
-          console.log(`[Route ${idx}] Registered:`, layer.route.path);
-        } else if (layer.name === 'router' && layer.handle && layer.handle.stack) {
-          // Nested routers
-          layer.handle.stack.forEach((nested, nidx) => {
-            if (nested.route && nested.route.path) {
-              console.log(`[Nested Route ${nidx}] Registered:`, nested.route.path);
-            }
-          });
-        }
-      });
-    }
     app.use(router);
 
     // Defensive: Catch-all error handler for malformed route registration
-    app.use((err, req, res, next) => {
+    app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
       if (err && err.message && err.message.includes('Missing parameter name')) {
         console.error('Malformed route detected:', err);
         res.status(500).json({ message: 'Server misconfiguration: Malformed route detected.', error: err.message });
