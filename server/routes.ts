@@ -19,6 +19,17 @@ const messageValidationSchema = z.object({
 
 const router = express.Router();
 
+// Move these helper functions to the top level to avoid ES5 strict mode errors
+function getLocalMidnight(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+function formatLocalDate(date: Date): string {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, '0');
+  const d = date.getDate().toString().padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 // POST /api/contact - Save contact and send notification email
 router.post("/api/contact", async (req, res) => {
   try {
@@ -277,17 +288,7 @@ router.get("/api/contacts/trends", async (req, res) => {
     let days = 7;
     let start;
     let groupFormat = "%Y-%m-%d";
-    // Helper to get local midnight
-    function getLocalMidnight(date: Date): Date {
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
-    // Helper to format date as YYYY-MM-DD in local time
-    function formatLocalDate(date: Date): string {
-      const y = date.getFullYear();
-      const m = (date.getMonth() + 1).toString().padStart(2, '0');
-      const d = date.getDate().toString().padStart(2, '0');
-      return `${y}-${m}-${d}`;
-    }
+    // In the route handler, remove the inner function declarations and use the top-level ones
     if (range === 'day') {
       days = 1;
       start = getLocalMidnight(now);
