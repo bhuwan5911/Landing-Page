@@ -45,6 +45,21 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     // Register all API routes
     app.use(router);
 
+    // ====== Print All Registered Route Paths (Debugging) ======
+    function printRoutePaths(router: any, prefix = '') {
+      if (router && router.stack) {
+        for (const layer of router.stack) {
+          if (layer.route && layer.route.path) {
+            console.log(`[ROUTE] ${prefix}${layer.route.path}`);
+          } else if (layer.name === 'router' && layer.handle && layer.handle.stack) {
+            printRoutePaths(layer.handle, prefix);
+          }
+        }
+      }
+    }
+    printRoutePaths(router);
+    // ==========================================================
+
     // ====== Route Path Validation (Permanent Fix) ======
     // Check all registered route paths for malformed parameters (e.g., /:, /api/:)
     function validateRoutePaths(router: any) {
