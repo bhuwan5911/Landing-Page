@@ -48,12 +48,20 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     const __dirname = path.resolve();
     const clientBuildPath = path.join(__dirname, "../client/dist");
     app.use(express.static(clientBuildPath));
+
+    // Health check route for backend status
     app.get("/", (_req, res) => {
       res.send(" Backend is working!");
     });
-    // app.get("*", (req, res) => {
-    //   res.sendFile(path.join(clientBuildPath, "index.html"));
-    // });
+
+    // ================= SPA Fallback Route =================
+    // This wildcard route ensures that all non-API, non-static requests
+    // are served the React app's index.html, enabling client-side routing.
+    // It must be placed after all API and static routes.
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(clientBuildPath, "index.html"));
+    });
+    // ======================================================
 
     // Start the HTTP server
     server.listen(Number(PORT), '0.0.0.0', () => {
