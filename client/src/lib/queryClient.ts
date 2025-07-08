@@ -2,7 +2,7 @@
 // Sets up React Query client for data fetching and caching. Includes API request helper and error handling.
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const BASE_URL = "https://creatorxjatin.onrender.com";
+const BASE_URL = "http://localhost:5001";
 
 // Helper to throw error if response is not OK
 async function throwIfResNotOk(res: Response) {

@@ -1,7 +1,7 @@
 // api.ts
 // API configuration and helper for making HTTP requests to the backend.
 // API configuration for all environments (force backend URL)
-const API_BASE_URL = 'https://creatorxjatin.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5001/api';
 
 export const apiConfig = {
   baseURL: API_BASE_URL,

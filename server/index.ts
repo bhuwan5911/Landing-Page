@@ -16,23 +16,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ======= Middlewares =======
-// Configure allowed origins for CORS
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://creatorxjatin.vercel.app" // <-- your actual Vercel frontend URL
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS"), false);
-    }
-  },
-  credentials: true
-}));
+// For development: Allow all origins (fixes CORS errors)
+// WARNING: Do not use this in production! Restrict origins for security.
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
