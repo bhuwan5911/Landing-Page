@@ -45,6 +45,36 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     // Register all API routes
     app.use(router);
 
+    // ====== Route Path Validation (Permanent Fix) ======
+    // Check all registered route paths for malformed parameters (e.g., /:, /api/:)
+    function validateRoutePaths(router: any) {
+      if (router && router.stack) {
+        for (const layer of router.stack) {
+          if (layer.route && layer.route.path) {
+            const path = layer.route.path;
+            // Check for malformed parameter (/: or /api/: etc)
+            if (/\/:($|\/|\?|#)/.test(path)) {
+              console.error(`Malformed route path detected: '${path}'`);
+              process.exit(1);
+            }
+          } else if (layer.name === 'router' && layer.handle && layer.handle.stack) {
+            // Nested routers
+            for (const nested of layer.handle.stack) {
+              if (nested.route && nested.route.path) {
+                const path = nested.route.path;
+                if (/\/:($|\/|\?|#)/.test(path)) {
+                  console.error(`Malformed nested route path detected: '${path}'`);
+                  process.exit(1);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    validateRoutePaths(router);
+    // ===================================================
+
     // Defensive: Catch-all error handler for malformed route registration
     app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
       if (err && err.message && err.message.includes('Missing parameter name')) {
