@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors"; // Enables Cross-Origin Resource Sharing
 import { connectDB } from "./db"; // Database connection utility
 import router from "./routes"; // Main API routes
+// Defensive: Only import one router, do not import contactRoute.ts separately
 import { createServer } from "http";
 import dotenv from "dotenv"; // Loads environment variables
 import path from "path";
@@ -42,7 +43,32 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     const server = createServer(app);
 
     // Register all API routes
+    // Defensive: Log all registered routes to catch malformed paths
+    if (router && router.stack) {
+      router.stack.forEach((layer, idx) => {
+        if (layer.route && layer.route.path) {
+          console.log(`[Route ${idx}] Registered:`, layer.route.path);
+        } else if (layer.name === 'router' && layer.handle && layer.handle.stack) {
+          // Nested routers
+          layer.handle.stack.forEach((nested, nidx) => {
+            if (nested.route && nested.route.path) {
+              console.log(`[Nested Route ${nidx}] Registered:`, nested.route.path);
+            }
+          });
+        }
+      });
+    }
     app.use(router);
+
+    // Defensive: Catch-all error handler for malformed route registration
+    app.use((err, req, res, next) => {
+      if (err && err.message && err.message.includes('Missing parameter name')) {
+        console.error('Malformed route detected:', err);
+        res.status(500).json({ message: 'Server misconfiguration: Malformed route detected.', error: err.message });
+      } else {
+        next(err);
+      }
+    });
 
     // Serve static files from React build (always, not just in production)
     const __dirname = path.resolve();
