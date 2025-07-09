@@ -18,7 +18,15 @@ const PORT = process.env.PORT || 5000;
 // ======= Middlewares =======
 // For development: Allow all origins (fixes CORS errors)
 // WARNING: Do not use this in production! Restrict origins for security.
-app.use(cors({ origin: true, credentials: true }));
+// Set allowed origins for CORS to only allow Vercel frontend
+const allowedOrigins = [
+  "https://creatorxjatin.vercel.app",
+  "https://www.creatorxjatin.vercel.app"
+];
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
