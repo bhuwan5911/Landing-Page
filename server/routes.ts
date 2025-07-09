@@ -43,6 +43,7 @@ router.options(["/api/contact", "/api/contact/"], (req, res) => {
 
 // POST /api/contact - Save contact and send notification email
 router.post("/api/contact", async (req, res) => {
+  console.log("[DEBUG] POST /api/contact hit. Body:", req.body);
   try {
     const messageData = messageValidationSchema.parse(req.body);
     const contact = new Contact({
@@ -99,6 +100,7 @@ router.post("/api/contact", async (req, res) => {
 });
 // POST /api/contact/ - Save contact and send notification email (trailing slash)
 router.post("/api/contact/", async (req, res) => {
+  console.log("[DEBUG] POST /api/contact/ hit. Body:", req.body);
   try {
     const messageData = messageValidationSchema.parse(req.body);
     const contact = new Contact({
@@ -154,9 +156,10 @@ router.post("/api/contact/", async (req, res) => {
   }
 });
 
-// Fallback for all other methods on /api/contact and /api/contact/
+// Catch-all for all other methods on /api/contact and /api/contact/
 router.all(["/api/contact", "/api/contact/"], (req, res) => {
   if (req.method !== "POST" && req.method !== "OPTIONS") {
+    console.log(`[DEBUG] ${req.method} /api/contact not allowed. Body:`, req.body);
     res.status(405).json({ message: `Method ${req.method} not allowed on /api/contact` });
   }
 });
