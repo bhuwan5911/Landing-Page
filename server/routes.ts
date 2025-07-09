@@ -31,18 +31,74 @@ function formatLocalDate(date: Date): string {
 }
 
 // DEBUG: Log all requests to /api/contact for troubleshooting
-router.all(["/api/contact", "/api/contact/"], (req, res, next) => {
-  console.log("DEBUG: Received", req.method, "at", req.originalUrl, "body:", req.body);
-  next();
-});
+// router.all(["/api/contact", "/api/contact/"], (req, res, next) => {
+//   console.log("DEBUG: Received", req.method, "at", req.originalUrl, "body:", req.body);
+//   next();
+// });
 
 // Explicitly handle OPTIONS for CORS preflight
 router.options(["/api/contact", "/api/contact/"], (req, res) => {
   res.sendStatus(204);
 });
 
-// POST /api/contact and /api/contact/ - Save contact and send notification email
-router.post(["/api/contact", "/api/contact/"], async (req, res) => {
+// POST /api/contact - Save contact and send notification email
+router.post("/api/contact", async (req, res) => {
+  try {
+    const messageData = messageValidationSchema.parse(req.body);
+    const contact = new Contact({
+      name: messageData.name,
+      email: messageData.email,
+      subject: messageData.subject,
+      message: messageData.message,
+      createdAt: new Date(),
+    });
+    await contact.save();
+    // Send notification email using nodemailer
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: `New Contact Form Submission from ${contact.name}`,
+      html: `
+          <div style="font-family: Arial, sans-serif; padding: 16px;">
+            <h2>📬 New Contact Form Submission</h2>
+            <p><b>Name:</b> ${contact.name}</p>
+            <p><b>Email:</b> ${contact.email}</p>
+            <p><b>Subject:</b> ${contact.subject}</p>
+            <p><b>Message:</b><br/>${contact.message}</p>
+            <hr style="margin:24px 0;" />
+            <p style="color:#888;font-size:0.95em;">This is an automated notification from your website.</p>
+          </div>
+        `
+    };
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Contact notification email sent!");
+    } catch (err) {
+      console.error("Failed to send contact notification email:", err);
+    }
+    res.status(201).json({ success: true, message: "Message received and saved" });
+  } catch (error) {
+    console.error('Error saving contact:', error);
+    if (error instanceof ZodError) {
+      res.status(400).json({ message: "Invalid form data", errors: error.errors });
+      return;
+    }
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    res.status(500).json({ message: "Server error", error: errorMessage, stack: errorStack });
+  }
+});
+// POST /api/contact/ - Save contact and send notification email (trailing slash)
+router.post("/api/contact/", async (req, res) => {
   try {
     const messageData = messageValidationSchema.parse(req.body);
     const contact = new Contact({
