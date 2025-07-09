@@ -30,8 +30,8 @@ function formatLocalDate(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-// POST /api/contact - Save contact and send notification email
-router.post("/api/contact", async (req, res) => {
+// POST /api/contact and /api/contact/ - Save contact and send notification email
+router.post(["/api/contact", "/api/contact/"], async (req, res) => {
   try {
     const messageData = messageValidationSchema.parse(req.body);
     const contact = new Contact({
