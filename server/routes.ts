@@ -36,6 +36,11 @@ router.all(["/api/contact", "/api/contact/"], (req, res, next) => {
   next();
 });
 
+// Explicitly handle OPTIONS for CORS preflight
+router.options(["/api/contact", "/api/contact/"], (req, res) => {
+  res.sendStatus(204);
+});
+
 // POST /api/contact and /api/contact/ - Save contact and send notification email
 router.post(["/api/contact", "/api/contact/"], async (req, res) => {
   try {
@@ -90,6 +95,13 @@ router.post(["/api/contact", "/api/contact/"], async (req, res) => {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     const errorStack = error instanceof Error ? error.stack : undefined;
     res.status(500).json({ message: "Server error", error: errorMessage, stack: errorStack });
+  }
+});
+
+// Fallback for all other methods on /api/contact and /api/contact/
+router.all(["/api/contact", "/api/contact/"], (req, res) => {
+  if (req.method !== "POST" && req.method !== "OPTIONS") {
+    res.status(405).json({ message: `Method ${req.method} not allowed on /api/contact` });
   }
 });
 
