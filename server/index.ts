@@ -84,11 +84,6 @@ function validateRoutePaths(router: any) {
       }
     });
 
-    // Serve static files from React build (always, not just in production)
-    const __dirname = path.resolve();
-    const clientBuildPath = path.join(__dirname, "../client/dist");
-    app.use(express.static(clientBuildPath));
-
     // Health check route for backend status
     app.get("/", (_req, res) => {
       res.send(" Backend is working!");
@@ -98,9 +93,9 @@ function validateRoutePaths(router: any) {
     // This wildcard route ensures that all non-API, non-static requests
     // are served the React app's index.html, enabling client-side routing.
     // It must be placed after all API and static routes.
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(clientBuildPath, "index.html"));
-    });
+    // app.get("*", (req, res) => {
+    //   res.sendFile(path.join(clientBuildPath, "index.html"));
+    // });
     // ======================================================
 
     // Start the HTTP server
