@@ -2,7 +2,8 @@
 // Sets up React Query client for data fetching and caching. Includes API request helper and error handling.
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const BASE_URL = "http://localhost:5001";
+// Use environment variable for API base URL, fallback to '/api' for relative proxying in production
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 // Helper to throw error if response is not OK
 async function throwIfResNotOk(res: Response) {
