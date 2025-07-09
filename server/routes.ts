@@ -30,6 +30,12 @@ function formatLocalDate(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+// DEBUG: Log all requests to /api/contact for troubleshooting
+router.all(["/api/contact", "/api/contact/"], (req, res, next) => {
+  console.log("DEBUG: Received", req.method, "at", req.originalUrl, "body:", req.body);
+  next();
+});
+
 // POST /api/contact and /api/contact/ - Save contact and send notification email
 router.post(["/api/contact", "/api/contact/"], async (req, res) => {
   try {
